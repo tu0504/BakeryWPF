@@ -3,6 +3,22 @@
   "WorkspaceRootPath": "D:\\Bakery\\",
   "Documents": [
     {
+      "AbsoluteMoniker": "D:0:0:{9B3A8DCC-7E26-469C-9575-E47734BBBADC}|Bakery.WpfApplication\\Bakery.WpfApplication.csproj|d:\\bakery\\bakery.wpfapplication\\appsettings.json||{90A6B3A7-C1A3-4009-A288-E2FF89E96FA0}",
+      "RelativeMoniker": "D:0:0:{9B3A8DCC-7E26-469C-9575-E47734BBBADC}|Bakery.WpfApplication\\Bakery.WpfApplication.csproj|solutionrelative:bakery.wpfapplication\\appsettings.json||{90A6B3A7-C1A3-4009-A288-E2FF89E96FA0}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{9B3A8DCC-7E26-469C-9575-E47734BBBADC}|Bakery.WpfApplication\\Bakery.WpfApplication.csproj|d:\\bakery\\bakery.wpfapplication\\loginwindow.xaml||{F11ACC28-31D1-4C80-A34B-F4E09D3D753C}",
+      "RelativeMoniker": "D:0:0:{9B3A8DCC-7E26-469C-9575-E47734BBBADC}|Bakery.WpfApplication\\Bakery.WpfApplication.csproj|solutionrelative:bakery.wpfapplication\\loginwindow.xaml||{F11ACC28-31D1-4C80-A34B-F4E09D3D753C}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{9B3A8DCC-7E26-469C-9575-E47734BBBADC}|Bakery.WpfApplication\\Bakery.WpfApplication.csproj|d:\\bakery\\bakery.wpfapplication\\app.xaml||{F11ACC28-31D1-4C80-A34B-F4E09D3D753C}",
+      "RelativeMoniker": "D:0:0:{9B3A8DCC-7E26-469C-9575-E47734BBBADC}|Bakery.WpfApplication\\Bakery.WpfApplication.csproj|solutionrelative:bakery.wpfapplication\\app.xaml||{F11ACC28-31D1-4C80-A34B-F4E09D3D753C}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{9B3A8DCC-7E26-469C-9575-E47734BBBADC}|Bakery.WpfApplication\\Bakery.WpfApplication.csproj|d:\\bakery\\bakery.wpfapplication\\mainwindow.xaml||{F11ACC28-31D1-4C80-A34B-F4E09D3D753C}",
+      "RelativeMoniker": "D:0:0:{9B3A8DCC-7E26-469C-9575-E47734BBBADC}|Bakery.WpfApplication\\Bakery.WpfApplication.csproj|solutionrelative:bakery.wpfapplication\\mainwindow.xaml||{F11ACC28-31D1-4C80-A34B-F4E09D3D753C}"
+    },
+    {
       "AbsoluteMoniker": "D:0:0:{9B3A8DCC-7E26-469C-9575-E47734BBBADC}|Bakery.WpfApplication\\Bakery.WpfApplication.csproj|d:\\bakery\\bakery.wpfapplication\\mainwindow.xaml.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
       "RelativeMoniker": "D:0:0:{9B3A8DCC-7E26-469C-9575-E47734BBBADC}|Bakery.WpfApplication\\Bakery.WpfApplication.csproj|solutionrelative:bakery.wpfapplication\\mainwindow.xaml.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
     }
@@ -43,6 +59,54 @@
             {
               "$type": "Document",
               "DocumentIndex": 0,
+              "Title": "appsettings.json",
+              "DocumentMoniker": "D:\\Bakery\\Bakery.WpfApplication\\appsettings.json",
+              "RelativeDocumentMoniker": "Bakery.WpfApplication\\appsettings.json",
+              "ToolTip": "D:\\Bakery\\Bakery.WpfApplication\\appsettings.json",
+              "RelativeToolTip": "Bakery.WpfApplication\\appsettings.json",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAAAQAAAAAAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.001642|",
+              "WhenOpened": "2025-11-09T17:19:42.069Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 2,
+              "Title": "App.xaml",
+              "DocumentMoniker": "D:\\Bakery\\Bakery.WpfApplication\\App.xaml",
+              "RelativeDocumentMoniker": "Bakery.WpfApplication\\App.xaml",
+              "ToolTip": "D:\\Bakery\\Bakery.WpfApplication\\App.xaml",
+              "RelativeToolTip": "Bakery.WpfApplication\\App.xaml",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.003549|",
+              "WhenOpened": "2025-11-09T16:23:52.099Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 1,
+              "Title": "LoginWindow.xaml",
+              "DocumentMoniker": "D:\\Bakery\\Bakery.WpfApplication\\LoginWindow.xaml",
+              "RelativeDocumentMoniker": "Bakery.WpfApplication\\LoginWindow.xaml",
+              "ToolTip": "D:\\Bakery\\Bakery.WpfApplication\\LoginWindow.xaml",
+              "RelativeToolTip": "Bakery.WpfApplication\\LoginWindow.xaml",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.003549|",
+              "WhenOpened": "2025-11-09T16:22:00.621Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 3,
+              "Title": "MainWindow.xaml",
+              "DocumentMoniker": "D:\\Bakery\\Bakery.WpfApplication\\MainWindow.xaml",
+              "RelativeDocumentMoniker": "Bakery.WpfApplication\\MainWindow.xaml",
+              "ToolTip": "D:\\Bakery\\Bakery.WpfApplication\\MainWindow.xaml",
+              "RelativeToolTip": "Bakery.WpfApplication\\MainWindow.xaml",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.003549|",
+              "WhenOpened": "2025-11-09T15:35:50.746Z"
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 4,
               "Title": "MainWindow.xaml.cs",
               "DocumentMoniker": "D:\\Bakery\\Bakery.WpfApplication\\MainWindow.xaml.cs",
               "RelativeDocumentMoniker": "Bakery.WpfApplication\\MainWindow.xaml.cs",
@@ -50,8 +114,7 @@
               "RelativeToolTip": "Bakery.WpfApplication\\MainWindow.xaml.cs",
               "ViewState": "AgIAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2025-11-09T15:35:47.967Z",
-              "EditorCaption": ""
+              "WhenOpened": "2025-11-09T15:35:47.967Z"
             }
           ]
         }

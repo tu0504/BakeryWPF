@@ -13,4 +13,16 @@
     <Folder Include="Shop\" />
   </ItemGroup>
 
+  <ItemGroup>
+    <ProjectReference Include="..\Bakery.Service\Bakery.Service.csproj">
+      <Private>True</Private>
+    </ProjectReference>
+  </ItemGroup>
+
+  <ItemGroup>
+    <None Update="appsettings.json">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </None>
+  </ItemGroup>
+
 </Project>
