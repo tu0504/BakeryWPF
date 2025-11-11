@@ -1,7 +1,11 @@
-# Ignore Visual Studio cache & settings
-.vs/
-*.user
+# ==========================
+# Visual Studio / .NET ignore
+# ==========================
+
+# User-specific files
+*.rsuser
 *.suo
+*.user
 *.userosscache
 *.sln.docstates
 
@@ -11,19 +15,26 @@
 [Ll]og/
 [Tt]emp/
 
-# Packages
-packages/
-*.nupkg
+# Visual Studio cache
+.vs/
 
-# Backup & auto-generated files
+# NuGet packages
+*.nupkg
+*.snupkg
+packages/
+*.nuget.props
+*.nuget.targets
+
+# Others
+*.dbmdl
 *.bak
 *.cache
 *.log
 *.vsidx
 
-# Others
-*.dbmdl
-*.dbproj.schemaview
-
-# Ignore local config
+# Configuration files (local only)
 appsettings.json
+appsettings.*.json
+
+# Publish output
+publish/
