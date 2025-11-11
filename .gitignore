@@ -1,0 +1,29 @@
+# Ignore Visual Studio cache & settings
+.vs/
+*.user
+*.suo
+*.userosscache
+*.sln.docstates
+
+# Build results
+[Bb]in/
+[Oo]bj/
+[Ll]og/
+[Tt]emp/
+
+# Packages
+packages/
+*.nupkg
+
+# Backup & auto-generated files
+*.bak
+*.cache
+*.log
+*.vsidx
+
+# Others
+*.dbmdl
+*.dbproj.schemaview
+
+# Ignore local config
+appsettings.json

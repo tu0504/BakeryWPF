@@ -4410,19 +4410,24 @@
     ]
   },
   "packageFolders": {
-    "C:\\Users\\trant\\.nuget\\packages\\": {}
+    "C:\\Users\\tuanv\\.nuget\\packages\\": {},
+    "D:\\Visual_Studio\\Shared\\NuGetPackages": {}
   },
   "project": {
     "version": "1.0.0",
     "restore": {
-      "projectUniqueName": "D:\\Bakery\\Bakery.Repository\\Bakery.Repository.csproj",
+      "projectUniqueName": "D:\\Tai_lieu\\Ky_5\\PRN212\\Assignment\\Bakery.Repository\\Bakery.Repository.csproj",
       "projectName": "Bakery.Repository",
-      "projectPath": "D:\\Bakery\\Bakery.Repository\\Bakery.Repository.csproj",
-      "packagesPath": "C:\\Users\\trant\\.nuget\\packages\\",
-      "outputPath": "D:\\Bakery\\Bakery.Repository\\obj\\",
+      "projectPath": "D:\\Tai_lieu\\Ky_5\\PRN212\\Assignment\\Bakery.Repository\\Bakery.Repository.csproj",
+      "packagesPath": "C:\\Users\\tuanv\\.nuget\\packages\\",
+      "outputPath": "D:\\Tai_lieu\\Ky_5\\PRN212\\Assignment\\Bakery.Repository\\obj\\",
       "projectStyle": "PackageReference",
+      "fallbackFolders": [
+        "D:\\Visual_Studio\\Shared\\NuGetPackages"
+      ],
       "configFilePaths": [
-        "C:\\Users\\trant\\AppData\\Roaming\\NuGet\\NuGet.Config",
+        "C:\\Users\\tuanv\\AppData\\Roaming\\NuGet\\NuGet.Config",
+        "C:\\Program Files (x86)\\NuGet\\Config\\Microsoft.VisualStudio.FallbackLocation.config",
         "C:\\Program Files (x86)\\NuGet\\Config\\Microsoft.VisualStudio.Offline.config"
       ],
       "originalTargetFrameworks": [
@@ -4448,7 +4453,8 @@
         "enableAudit": "true",
         "auditLevel": "low",
         "auditMode": "direct"
-      }
+      },
+      "SdkAnalysisLevel": "9.0.300"
     },
     "frameworks": {
       "net8.0": {
@@ -4495,7 +4501,7 @@
             "privateAssets": "all"
           }
         },
-        "runtimeIdentifierGraphPath": "C:\\Program Files\\dotnet\\sdk\\8.0.400/PortableRuntimeIdentifierGraph.json"
+        "runtimeIdentifierGraphPath": "C:\\Program Files\\dotnet\\sdk\\9.0.305/PortableRuntimeIdentifierGraph.json"
       }
     }
   }
