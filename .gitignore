@@ -1,0 +1,40 @@
+# ==========================
+# Visual Studio / .NET ignore
+# ==========================
+
+# User-specific files
+*.rsuser
+*.suo
+*.user
+*.userosscache
+*.sln.docstates
+
+# Build results
+[Bb]in/
+[Oo]bj/
+[Ll]og/
+[Tt]emp/
+
+# Visual Studio cache
+.vs/
+
+# NuGet packages
+*.nupkg
+*.snupkg
+packages/
+*.nuget.props
+*.nuget.targets
+
+# Others
+*.dbmdl
+*.bak
+*.cache
+*.log
+*.vsidx
+
+# Configuration files (local only)
+appsettings.json
+appsettings.*.json
+
+# Publish output
+publish/
