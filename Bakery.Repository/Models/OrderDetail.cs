@@ -1,7 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 
-namespace Bakery.Repository.Model;
+namespace Bakery.Repository.Models;
 
 public partial class OrderDetail
 {
