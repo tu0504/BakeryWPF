@@ -1,0 +1,84 @@
+﻿<Window x:Class="Bakery.WpfApplication.MainWindow"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:local="clr-namespace:Bakery.WpfApplication"
+        mc:Ignorable="d"
+        WindowStartupLocation="CenterScreen"
+        Title="Bakery Window" Height="450" Width="1200">
+    <Grid>
+        <Grid.RowDefinitions>
+            <RowDefinition Height="Auto"/>
+            <RowDefinition Height="*"/>
+        </Grid.RowDefinitions>
+
+        <StackPanel Orientation="Vertical" HorizontalAlignment="Center" Height="32" VerticalAlignment="Top" Width="1200" Grid.Row="0">
+            <Label x:Name="Login"
+               Content="WELCOME TO THE BAKERY"
+               HorizontalAlignment="Center"
+               VerticalAlignment="Center"
+               FontWeight="Bold"
+               Foreground="Azure"/>
+            <StackPanel.Background>
+                <LinearGradientBrush StartPoint="0,0" EndPoint="1,0">
+                    <GradientStop Color="#FF0099FF" Offset="0"/>
+                    <GradientStop Color="#EC136D" Offset="1"/>
+                </LinearGradientBrush>
+            </StackPanel.Background>
+        </StackPanel>
+
+        <StackPanel HorizontalAlignment="Left" Height="1000" Margin="1,0,0,0" VerticalAlignment="Top" Width="98" Background="#FF717578" Grid.Row="1">
+            <TextBlock x:Name="CartItems" Height="19" TextWrapping="Wrap" Text="0" Width="10" FontSize="18" Margin="42,0,0,0" />
+            <Button x:Name="btnShoppingCart" Height="43" Width="46" 
+                Background="Transparent" BorderBrush="Transparent"
+                HorizontalAlignment="Left" Click="btnShoppingClick" Margin="19,0,0,0">
+                <StackPanel Orientation="Horizontal" Height="39" Width="146">
+                    <Image Source="/Images/shoppingcart.png" Width="44" Height="40" Stretch="Uniform" VerticalAlignment="Center"/>
+                </StackPanel>
+            </Button>
+
+            <!-- <Button x:Name="btnBuy" Content="Buy" -->
+            <!--         Width="96" Height="40"  -->
+            <!--         Click="Button_Click" Margin="0,20,0,0"> -->
+            <!--     <Button.Background> -->
+            <!--         <SolidColorBrush Color="#0099FF" /> -->
+            <!--     </Button.Background> -->
+            <!--     <Button.Triggers> -->
+            <!--         <EventTrigger RoutedEvent="MouseEnter"> -->
+            <!--             <BeginStoryboard> -->
+            <!--                 <Storyboard> -->
+            <!--                     <ColorAnimation Storyboard.TargetProperty="(Button.Background).(SolidColorBrush.Color)" -->
+            <!--                                     To="#28AEED" Duration="0:0:0.2"/> -->
+            <!--                 </Storyboard> -->
+            <!--             </BeginStoryboard> -->
+            <!--         </EventTrigger> -->
+            <!--         <EventTrigger RoutedEvent="MouseLeave"> -->
+            <!--             <BeginStoryboard> -->
+            <!--                 <Storyboard> -->
+            <!--                     <ColorAnimation Storyboard.TargetProperty="(Button.Background).(SolidColorBrush.Color)" -->
+            <!--                                     To="#0099FF" Duration="0:0:0.2"/> -->
+            <!--                 </Storyboard> -->
+            <!--             </BeginStoryboard> -->
+            <!--         </EventTrigger> -->
+            <!--     </Button.Triggers> -->
+            <!-- </Button> -->
+
+            <Button x:Name="Bakery" 
+                Height="40" 
+                Margin="5,20,5,0" 
+                Content="Koi List" 
+                Foreground="Black" 
+                Click="bakeryList_Click"/>
+
+            <Button x:Name="logOut" 
+                Height="40" 
+                Margin="5,20,5,0" 
+                Content="Log Out" 
+                Background="Orange"
+                Click="logOut_Click"/>
+        </StackPanel>
+
+        <ContentControl x:Name="ContentArea" Grid.Row="1" Margin="104,10,20,3" VerticalAlignment="Stretch" HorizontalAlignment="Stretch"/>
+    </Grid>
+</Window>

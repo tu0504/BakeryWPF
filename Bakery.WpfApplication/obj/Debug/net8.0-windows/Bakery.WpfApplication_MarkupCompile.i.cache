@@ -10,11 +10,11 @@ none
 false
 TRACE;DEBUG;NET;NET8_0;NETCOREAPP
 D:\Bakery\Bakery.WpfApplication\App.xaml
-2-216653475
+9-860614926
 
-7581272232
+14-938343028
 2461056097363
-LoginWindow.xaml;MainWindow.xaml;
+AdminDashboardWindow.xaml;LoginWindow.xaml;RegisterWindow.xaml;ShopWindow.xaml;Shop\BakeryList.xaml;Shop\CheckOut.xaml;View\BakeryManagement.xaml;View\OrderManagement.xaml;View\UserManagement.xaml;
 
 False
 

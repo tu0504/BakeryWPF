@@ -7,15 +7,57 @@
     </ApplicationDefinition>
   </ItemGroup>
   <ItemGroup>
+    <Compile Update="AdminDashboardWindow.xaml.cs">
+      <SubType>Code</SubType>
+    </Compile>
     <Compile Update="LoginWindow.xaml.cs">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Update="RegisterWindow.xaml.cs">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Update="Shop\BakeryList.xaml.cs">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Update="Shop\CheckOut.xaml.cs">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Update="View\BakeryManagement.xaml.cs">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Update="View\OrderManagement.xaml.cs">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Update="View\UserManagement.xaml.cs">
       <SubType>Code</SubType>
     </Compile>
   </ItemGroup>
   <ItemGroup>
+    <Page Update="AdminDashboardWindow.xaml">
+      <SubType>Designer</SubType>
+    </Page>
     <Page Update="LoginWindow.xaml">
       <SubType>Designer</SubType>
     </Page>
-    <Page Update="MainWindow.xaml">
+    <Page Update="ShopWindow.xaml">
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Update="RegisterWindow.xaml">
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Update="Shop\BakeryList.xaml">
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Update="Shop\CheckOut.xaml">
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Update="View\BakeryManagement.xaml">
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Update="View\OrderManagement.xaml">
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Update="View\UserManagement.xaml">
       <SubType>Designer</SubType>
     </Page>
   </ItemGroup>
