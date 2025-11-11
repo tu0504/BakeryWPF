@@ -23,5 +23,30 @@ namespace Bakery.WpfApplication
         {
             InitializeComponent();
         }
+
+        private void btnHome_OnClick(object sender, RoutedEventArgs e)
+        {
+
+        }
+
+        private void btnUser_Click(object sender, RoutedEventArgs e)
+        {
+
+        }
+
+        private void btnBakery_Click(object sender, RoutedEventArgs e)
+        {
+
+        }
+
+        private void btnOrder_Click(object sender, RoutedEventArgs e)
+        {
+
+        }
+
+        private void btnLogOut_Click(object sender, RoutedEventArgs e)
+        {
+
+        }
     }
 }
