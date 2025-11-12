@@ -23,5 +23,20 @@ namespace Bakery.WpfApplication.Shop
         {
             InitializeComponent();
         }
+        private void btnCheckout(object sender, RoutedEventArgs e)
+        {
+           
+        }
+
+       
+        private void btnDeleteOrder(object sender, RoutedEventArgs e)
+        {
+     
+         
+        }
+        private void DgData_OnSelectionChanged(object sender, SelectionChangedEventArgs e)
+        {
+           
+        }
     }
 }

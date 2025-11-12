@@ -26,12 +26,36 @@ namespace Bakery.WpfApplication
 
         private void btnRegister_Click(object sender, RoutedEventArgs e)
         {
-
+            RegisterWindow regis = new();
+            regis.ShowDialog();
         }
 
         private void btnLogin_Click(object sender, RoutedEventArgs e)
         {
+            AdminDashboardWindow adminDashboard = new AdminDashboardWindow();
+            adminDashboard.ShowDialog();
+        }
 
+
+
+
+        private void txtUser_GotFocus(object sender, RoutedEventArgs e)
+        {
+            txtPlaceholder.Visibility = Visibility.Collapsed;
+        }
+        private void txtUser_LostFocus(object sender, RoutedEventArgs e)
+        {
+            txtPlaceholder.Visibility =
+                string.IsNullOrWhiteSpace(txtUser.Text) ? Visibility.Visible : Visibility.Collapsed;
+        }
+        private void txtPass_GotFocus(object sender, RoutedEventArgs e)
+        {
+            txtPlaceholderP.Visibility = Visibility.Collapsed;
+        }
+        private void txtPass_LostFocus(object sender, RoutedEventArgs e)
+        {
+            txtPlaceholderP.Visibility =
+                string.IsNullOrWhiteSpace(txtPlaceholderP.Text) ? Visibility.Visible : Visibility.Collapsed;
         }
     }
 }

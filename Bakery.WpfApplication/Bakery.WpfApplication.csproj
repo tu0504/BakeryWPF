@@ -9,9 +9,19 @@
   </PropertyGroup>
 
   <ItemGroup>
+    <None Remove="Images\background.png" />
+  </ItemGroup>
+
+  <ItemGroup>
     <ProjectReference Include="..\Bakery.Service\Bakery.Service.csproj">
       <Private>True</Private>
     </ProjectReference>
+  </ItemGroup>
+
+  <ItemGroup>
+    <Resource Include="Images\background.png">
+      <CopyToOutputDirectory>Never</CopyToOutputDirectory>
+    </Resource>
   </ItemGroup>
 
   <ItemGroup>

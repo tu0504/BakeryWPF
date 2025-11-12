@@ -166,7 +166,7 @@ IsHitTestVisible="False"/>
                             Background="#80B0B0B0"
                             HorizontalAlignment="Center"
                             GotFocus="txtEmail_GotFocus"
-                            LostFocus="txtEmail_LostFocus">  
+                            LostFocus="txtEmail_LostFocus">
                             <TextBox.Style>
                                 <Style TargetType="TextBox">
                                     <Setter Property="Template">
@@ -184,7 +184,7 @@ IsHitTestVisible="False"/>
                                 </Style>
                             </TextBox.Style>
                         </TextBox>
-                        <TextBlock x:Name="txtPlaceholder" Text="Enter User Name"
+                        <TextBlock x:Name="txtPlaceholder" Text="Enter Email"
    Foreground="Black"
    FontSize="20"
    FontWeight="Medium"
@@ -232,8 +232,8 @@ LostFocus="txtPass_LostFocus">
                            FontSize="20"
                            FontWeight="Medium"
                            FontFamily="Helvetica"
-                           VerticalAlignment="Center"
-                           Margin="10,0,0,0"
+                           VerticalAlignment="Top"
+                           Margin="10,13,0,0"
                            IsHitTestVisible="False"
                            Visibility="Visible"/>
                         <Image Source="/Images/pass.png" Margin="408,6,7,6"/>
@@ -290,7 +290,7 @@ LostFocus="txtPassC_LostFocus">
                            FontSize="12"
                            FontFamily="Montserrat"
                            Cursor="Hand"                           
-                           Click="btnRegister_Click" Margin="160,0,160,0">
+                           Click="btnRegister_Click" Margin="160,0,160,0" Height="40" VerticalAlignment="Top">
                             <Button.Style>
                                 <Style TargetType="Button">
                                     <Setter Property="Background" Value="#0099FF"/>

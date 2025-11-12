@@ -4,8 +4,7 @@
         xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:Bakery.WpfApplication.View"
-        mc:Ignorable="d"
-        Loaded="UserManagement_OnLoaded" Height="450" Width="1241">
+        mc:Ignorable="d" Height="510" Width="1241" Loaded="UserControl_Loaded" >
     <Grid Margin="10">
         <Grid.RowDefinitions>
             <RowDefinition Height="*" />
@@ -18,18 +17,29 @@
               Grid.Row="0"
               AutoGenerateColumns="False"
               IsReadOnly="False"
-              SelectionChanged="UserDataGrid_OnSelectionChanged"
+              
               CanUserAddRows="False">
             <DataGrid.Columns>
-                <DataGridTextColumn Header="userID" Binding="{Binding UserId}" Width="60" IsReadOnly="True" />
-                <DataGridTextColumn Header="username" Binding="{Binding UserName}" Width="70" />
-                <DataGridTextColumn Header="fullName" Binding="{Binding FullName}" Width="150" />
-                <DataGridTextColumn Header="password" Binding="{Binding Password}" Width="120" />
-                <DataGridTextColumn Header="roleId" Binding="{Binding RoleId}" Width="50" />
-                <DataGridTextColumn Header="birthDate" Binding="{Binding Birthday}" Width="100" />
-                <DataGridTextColumn Header="address" Binding="{Binding Address}" Width="100" />
-                <DataGridTextColumn Header="phone" Binding="{Binding Phone}" Width="120" />
-                <DataGridTextColumn Header="status" Binding="{Binding Status}" Width="100" />
+                <DataGridTextColumn Header="User ID" Binding="{Binding UserId}" Width="60" IsReadOnly="True" />
+                <DataGridTextColumn Header="Username" Binding="{Binding UserName}" Width="120" />
+                <DataGridTextColumn Header="Full Name" Binding="{Binding FullName}" Width="150" />
+                <DataGridTextColumn Header="Email" Binding="{Binding Email}" Width="150" />
+                <DataGridTextColumn Header="Address" Binding="{Binding Address}" Width="120" />
+                <DataGridTextColumn Header="Phone Number" Binding="{Binding Phone}" Width="130" />
+                <DataGridTextColumn Header="Created At" Binding="{Binding CreatedAt}" Width="130" />
+                <DataGridTextColumn Header="Role" Binding="{Binding Role}" Width="100" />
+                <DataGridTextColumn Header="Status" Binding="{Binding Status}" Width="100" />
+                <DataGridTemplateColumn Header="Action" Width="70">
+                    <DataGridTemplateColumn.CellTemplate>
+                        <DataTemplate>
+                            <Button Content="Edit" 
+                            Click="btnEdit_Click"
+                            Foreground="Black"
+                            />
+                            
+                        </DataTemplate>
+                    </DataGridTemplateColumn.CellTemplate>
+                </DataGridTemplateColumn>
             </DataGrid.Columns>
         </DataGrid>
 
@@ -38,30 +48,53 @@
                 Height="38"
                 VerticalAlignment="Top">
             <TextBox x:Name="txtUserId"
+                 
                  Width="40"
                  Margin="5"
                  IsEnabled="False" />
             <TextBox x:Name="txtUserName"
+                 
                  Width="70"
-                 Margin="5" />
+                 Margin="5" 
+                 Foreground="Gray"
+                 />
             <TextBox x:Name="txtFullName"
+                
                  Width="140"
-                 Margin="5" />
+                 Margin="5"    
+                 Foreground="Gray"
+               />
+            <TextBox x:Name="txtEmail"
+                
+                Width="120"
+                Margin="5" 
+                Foreground="Gray"
+                />
             <TextBox x:Name="txtPassword"
+                 
                  Width="100"
-                 Margin="5" />
-            <TextBox x:Name="txtRoleId"
-                 Width="40"
-                 Margin="5" />
-            <TextBox x:Name="txtBirthDate"
-                 Width="70"
-                 Margin="5" />
+                 Margin="5"
+                 Foreground="Gray"
+                 />
+            <TextBox x:Name="txtRole"
+                 
+                 Width="50"
+                 Margin="5"
+                 Foreground="Gray"
+                 />
+            
             <TextBox x:Name="txtAddress"
-                 Width="100"
-                 Margin="5" />
+                 
+                 Width="120"
+                 Margin="5" 
+                 Foreground="Gray"
+                />
             <TextBox x:Name="txtPhone"
-                 Width="100"
-                 Margin="5" />
+                 
+                 Width="120"
+                 Margin="5"
+                 Foreground="Gray"
+                 />
             <StackPanel Orientation="Horizontal" Margin="5" VerticalAlignment="Center">
                 <RadioButton x:Name="rbStatusActive" Content="Active" GroupName="StatusGroup" Margin="5"
                          IsChecked="{Binding IsActive, Mode=TwoWay}" />
@@ -206,9 +239,9 @@
                            VerticalAlignment="Center"
                            Margin="10,0,8,0"
                            IsHitTestVisible="False" />
-
                 </Grid>
             </StackPanel>
+
         </StackPanel>
 
     </Grid>

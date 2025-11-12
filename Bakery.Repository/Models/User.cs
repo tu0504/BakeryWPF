@@ -11,6 +11,8 @@ public partial class User
 
     public string? Email { get; set; }
 
+    public string? FullName { get; set; }
+
     public string Phone { get; set; } = null!;
 
     public string? Address { get; set; }
@@ -18,6 +20,8 @@ public partial class User
     public string Password { get; set; } = null!;
 
     public string Role { get; set; } = null!;
+
+    public bool Status { get; set; }
 
     public DateTime? CreatedAt { get; set; }
 

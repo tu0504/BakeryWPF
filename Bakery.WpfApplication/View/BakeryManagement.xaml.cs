@@ -17,11 +17,23 @@ namespace Bakery.WpfApplication.View
     /// <summary>
     /// Interaction logic for BakeryManagement.xaml
     /// </summary>
-    public partial class BakeryManagement : Window
+    public partial class BakeryManagement : UserControl
     {
         public BakeryManagement()
         {
             InitializeComponent();
+        }
+        private void txtSearch_GotFocus(object sender, RoutedEventArgs e)
+        {
+            txtPlaceholder.Visibility = Visibility.Collapsed;
+        }
+
+        private void txtSearch_LostFocus(object sender, RoutedEventArgs e)
+        {
+            if (string.IsNullOrWhiteSpace(txtSearch.Text))
+            {
+                txtPlaceholder.Visibility = Visibility.Visible;
+            }
         }
     }
 }

@@ -1,4 +1,7 @@
-﻿using System;
+﻿using Bakery.Service.Implement;
+using Bakery.Service.Interface;
+using Bakery.WpfApplication.View;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -19,6 +22,7 @@ namespace Bakery.WpfApplication
     /// </summary>
     public partial class AdminDashboardWindow : Window
     {
+        private readonly IUserService _userService;
         public AdminDashboardWindow()
         {
             InitializeComponent();
@@ -31,9 +35,8 @@ namespace Bakery.WpfApplication
 
         private void btnUser_Click(object sender, RoutedEventArgs e)
         {
-
+            ContentArea.Content = new View.UserManagement(_userService);
         }
-
         private void btnBakery_Click(object sender, RoutedEventArgs e)
         {
 
