@@ -14,9 +14,10 @@ namespace Bakery.WpfApplication
     /// <summary>
     /// Interaction logic for MainWindow.xaml
     /// </summary>
-    public partial class MainWindow : Window
+    public partial class ShopWindow : Window
     {
-        public MainWindow()
+
+        public ShopWindow()
         {
             InitializeComponent();
         }
