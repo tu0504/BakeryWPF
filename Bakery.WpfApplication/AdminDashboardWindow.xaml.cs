@@ -63,7 +63,9 @@ namespace Bakery.WpfApplication
 
         private void btnLogOut_Click(object sender, RoutedEventArgs e)
         {
-
+            LoginWindow l = new();
+            l.Show();
+            Close();
         }
     }
 }
