@@ -8,7 +8,7 @@
              Height="Auto" Width="Auto">
     <Grid Background="Transparent">
         <ScrollViewer VerticalScrollBarVisibility="Auto" HorizontalScrollBarVisibility="Auto">
-            <WrapPanel x:Name="DataWrapPanel" Margin="10" HorizontalAlignment="Stretch"/>
+            <WrapPanel x:Name="DataWrapPanel" Orientation="Horizontal" Width="600"/>
         </ScrollViewer>
     </Grid>
 </UserControl>

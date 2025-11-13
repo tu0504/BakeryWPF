@@ -3,6 +3,7 @@ using Bakery.Repository.Models;
 using Bakery.Service;
 using System;
 using System.Collections.Generic;
+using System.IO;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
@@ -77,19 +78,22 @@ namespace Bakery.WpfApplication.Shop
 
                 StackPanel panel = new StackPanel { Margin = new Thickness(5) };
 
-                if (!string.IsNullOrEmpty(product.ImageUrl))
+                string imagePath = System.IO.Path.Combine(AppDomain.CurrentDomain.BaseDirectory, product.ImageUrl.Replace("/", "\\"));
+                if (File.Exists(imagePath))
                 {
-                    try
+                    panel.Children.Add(new Image
                     {
-                        panel.Children.Add(new Image
-                        {
-                            Source = new BitmapImage(new Uri(product.ImageUrl, UriKind.RelativeOrAbsolute)),
-                            Width = 150,
-                            Height = 120
-                        });
-                    }
-                    catch { }
+                        Source = new BitmapImage(new Uri(imagePath, UriKind.Absolute)),
+                        Width = 150,
+                        Height = 120,
+                        Stretch = Stretch.UniformToFill
+                    });
                 }
+                else
+                {
+                    panel.Children.Add(new TextBlock { Text = "No image", Foreground = Brushes.Gray });
+                }
+
 
                 panel.Children.Add(new TextBlock { Text = product.ProductName, FontWeight = FontWeights.Bold, Margin = new Thickness(5) });
                 panel.Children.Add(new TextBlock { Text = $"Price: ${product.Price}", Margin = new Thickness(5) });
