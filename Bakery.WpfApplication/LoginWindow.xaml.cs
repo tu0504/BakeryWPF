@@ -1,4 +1,10 @@
-﻿using Bakery.Service;
+﻿using Bakery.Repository.Models;
+using Bakery.Repository.Repositories.Implement;
+using Bakery.Repository.Repositories.Interface;
+using Bakery.Service;
+using Bakery.Service.Implement;
+using Bakery.Service.Interface;
+using System;
 using System.Windows;
 
 namespace Bakery.WpfApplication
@@ -8,12 +14,30 @@ namespace Bakery.WpfApplication
     /// </summary>
     public partial class LoginWindow : Window
     {
-        private readonly UserService _userService;
+
+        private readonly IUserService _userService;
 
         public LoginWindow()
         {
             InitializeComponent();
-            _userService = new UserService();
+            // keep lightweight initialization; if this fails you will get a clear message instead of NRE later
+            try
+            {
+                IUserRepository userRepository = new UserRepository();
+                _userService = new UserServices(userRepository);
+            }
+            catch (Exception ex)
+            {
+                // log or show a friendly error so developer can see what failed during construction
+                MessageBox.Show($"Failed to create default services: {ex.Message}", "Initialization error", MessageBoxButton.OK, MessageBoxImage.Error);
+                _userService = null;
+            }
+        }
+
+        public LoginWindow(IUserService userService)
+        {
+            InitializeComponent();
+            _userService = userService;
         }
 
         private void btnLogin_Click(object sender, RoutedEventArgs e)
@@ -54,6 +78,12 @@ namespace Bakery.WpfApplication
             {
                 MessageBox.Show($"Error: {ex.Message}", "Login Error", MessageBoxButton.OK, MessageBoxImage.Error);
             }
+        }
+
+        private void btnRegister_Click(object sender, RoutedEventArgs e)
+        {
+            RegisterWindow register = new RegisterWindow();
+            register.ShowDialog();
         }
 
         private void btnRegister_Click(object sender, RoutedEventArgs e)

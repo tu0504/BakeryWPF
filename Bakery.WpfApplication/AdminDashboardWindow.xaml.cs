@@ -23,7 +23,7 @@ namespace Bakery.WpfApplication
     /// </summary>
     public partial class AdminDashboardWindow : Window
     {
-    private readonly IUserService _userService;
+        private readonly IUserService _userService;
 
         public AdminDashboardWindow()
         {

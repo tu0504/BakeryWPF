@@ -69,12 +69,28 @@ namespace Bakery.Service
         {
             try
             {
-                if (_orderRepo.GetById(entity.OrderId) == null)
-                {
-                    return false;
-                }
 
-                return _orderRepo.Remove(entity);
+                using (var ctx = new Bakery.Repository.Context.BakeryContext())
+                {
+                    var orderRepo = new Bakery.Repository.Repositories.OrderRepo(ctx);
+                    var orderDetailRepo = new Bakery.Repository.Repositories.OrderDetailRepo(ctx);
+
+                    var existing = orderRepo.GetById(entity.OrderId);
+                    if (existing == null)
+                    {
+                        return false;
+                    }
+
+                    var details = ctx.OrderDetails.Where(od => od.OrderId == existing.OrderId).ToList();
+                    if (details != null && details.Count > 0)
+                    {
+                        ctx.OrderDetails.RemoveRange(details);
+                        ctx.SaveChanges();
+                    }
+
+                    orderRepo.Remove(existing);
+                    return true;
+                }
             }
             catch (Exception ex)
             {

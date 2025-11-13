@@ -1,10 +1,11 @@
-﻿using Bakery.Repository.Models;
+using Bakery.Repository.Models;
 using Bakery.Service;
 using System;
 using System.Collections.Generic;
 using System.Text.RegularExpressions;
 using System.Windows;
 using System.Windows.Controls;
+
 
 namespace Bakery.WpfApplication
 {
@@ -101,5 +102,7 @@ namespace Bakery.WpfApplication
                 MessageBox.Show($"Registration failed: {ex.Message}", "Error", MessageBoxButton.OK, MessageBoxImage.Error);
             }
         }
+
     }
+
 }

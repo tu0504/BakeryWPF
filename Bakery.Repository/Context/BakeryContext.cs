@@ -1,8 +1,6 @@
 ﻿using Bakery.Repository.Models;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Configuration;
-using System;
-using System.Collections.Generic;
 
 namespace Bakery.Repository.Context;
 

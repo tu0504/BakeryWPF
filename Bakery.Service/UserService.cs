@@ -34,6 +34,15 @@ namespace Bakery.Service
         public void SaveUser(User user) => _impl.SaveUser(user);
         public void DeleteCustomer(User user) => _impl.DeleteCustomer(user);
         public void UpdateCustomer(User user) => _impl.UpdateCustomer(user);
-        public List<User> SearchByName(string fullName) => _impl.SearchByName(fullName);
+
+        public User GetUserByEmail(string email)
+        {
+            throw new NotImplementedException();
+        }
+
+        public List<User> SearchByNameOrEmail(string searchTerm)
+        {
+            throw new NotImplementedException();
+        }
     }
 }

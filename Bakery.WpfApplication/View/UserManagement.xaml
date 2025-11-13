@@ -4,7 +4,7 @@
         xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:Bakery.WpfApplication.View"
-        mc:Ignorable="d" Height="510" Width="1241" Loaded="UserControl_Loaded" >
+        mc:Ignorable="d" Height="500" Width="1241" Loaded="UserControl_Loaded" >
     <Grid Margin="10">
         <Grid.RowDefinitions>
             <RowDefinition Height="*" />
@@ -35,8 +35,8 @@
                             <Button Content="Edit" 
                             Click="btnEdit_Click"
                             Foreground="Black"
+                                    FontWeight="Bold"
                             />
-                            
                         </DataTemplate>
                     </DataGridTemplateColumn.CellTemplate>
                 </DataGridTemplateColumn>
@@ -47,59 +47,126 @@
         <StackPanel Grid.Row="1" Orientation="Horizontal"
                 Height="38"
                 VerticalAlignment="Top">
-            <TextBox x:Name="txtUserId"
-                 
-                 Width="40"
-                 Margin="5"
-                 IsEnabled="False" />
-            <TextBox x:Name="txtUserName"
-                 
-                 Width="70"
-                 Margin="5" 
-                 Foreground="Gray"
-                 />
-            <TextBox x:Name="txtFullName"
-                
-                 Width="140"
-                 Margin="5"    
-                 Foreground="Gray"
-               />
-            <TextBox x:Name="txtEmail"
-                
-                Width="120"
-                Margin="5" 
-                Foreground="Gray"
+            <Grid Width="40" Margin="5">
+
+                <TextBlock Text="ID" 
+                   VerticalAlignment="Center" 
+                   Foreground="#888" 
+                   IsHitTestVisible="False"
+                   Background="White" Height="28"/>
+                <TextBox x:Name="txtUserId"
+                   Background="Transparent"
+                   VerticalContentAlignment="Center"
+                   IsEnabled="False" 
+                   GotFocus="txtInput_GotFocus" 
+                   LostFocus="txtInput_LostFocus"/>
+
+            </Grid>
+
+            <Grid Width="85" Margin="5">
+                <TextBlock Text="User Name" 
+                VerticalAlignment="Center" 
+                Foreground="#888" 
+                IsHitTestVisible="False"
+                Background="White" Height="28"/>
+                <TextBox x:Name="txtUserName"
+                Background="Transparent"
+                VerticalContentAlignment="Center"
+                GotFocus="txtInput_GotFocus" 
+                LostFocus="txtInput_LostFocus"
                 />
-            <TextBox x:Name="txtPassword"
-                 
-                 Width="100"
-                 Margin="5"
-                 Foreground="Gray"
-                 />
-            <TextBox x:Name="txtRole"
-                 
-                 Width="50"
-                 Margin="5"
-                 Foreground="Gray"
-                 />
-            
-            <TextBox x:Name="txtAddress"
-                 
-                 Width="120"
-                 Margin="5" 
-                 Foreground="Gray"
+            </Grid>
+
+            <Grid Width="120" Margin="5">
+                <TextBlock Text="Full Name" 
+                VerticalAlignment="Center" 
+                Foreground="#888" 
+                IsHitTestVisible="False"
+                Background="White" Height="28"/>
+                <TextBox x:Name="txtFullName"
+                Background="Transparent"
+                VerticalContentAlignment="Center"
+                GotFocus="txtInput_GotFocus" 
+                LostFocus="txtInput_LostFocus"
                 />
-            <TextBox x:Name="txtPhone"
-                 
-                 Width="120"
-                 Margin="5"
-                 Foreground="Gray"
-                 />
+            </Grid>
+
+            <Grid Width="140" Margin="5">
+                <TextBlock Text="Email" 
+                VerticalAlignment="Center" 
+                Foreground="#888" 
+                IsHitTestVisible="False"
+                Background="White" Height="28"/>
+                <TextBox x:Name="txtEmail"
+                Background="Transparent"
+                VerticalContentAlignment="Center"
+                GotFocus="txtInput_GotFocus" 
+                LostFocus="txtInput_LostFocus"
+    />
+            </Grid>
+            <Grid Width="100" Margin="5">
+                <TextBlock Text="Password" 
+            VerticalAlignment="Center" 
+            Foreground="#888" 
+            IsHitTestVisible="False"
+            Background="White" Height="28"/>
+                <TextBox x:Name="txtPassword"
+            Background="Transparent"
+            VerticalContentAlignment="Center"
+            GotFocus="txtInput_GotFocus" 
+            LostFocus="txtInput_LostFocus"
+/>
+            </Grid>
+            <Grid Width="50" Margin="5">
+                <TextBlock Text="US / AD" 
+            VerticalAlignment="Center" 
+            Foreground="#888" 
+            IsHitTestVisible="False"
+            Background="White" Height="28"/>
+                <TextBox x:Name="txtRole"
+            Background="Transparent"
+            VerticalContentAlignment="Center"
+            GotFocus="txtInput_GotFocus" 
+            LostFocus="txtInput_LostFocus"
+/>
+            </Grid>
+            <Grid Width="90" Margin="5">
+                <TextBlock Text="Address" 
+            VerticalAlignment="Center" 
+            Foreground="#888" 
+            IsHitTestVisible="False"
+            Background="White" Height="28"/>
+                <TextBox x:Name="txtAddress"
+            Background="Transparent"
+            VerticalContentAlignment="Center"
+            GotFocus="txtInput_GotFocus" 
+            LostFocus="txtInput_LostFocus"
+/>
+            </Grid>
+            <Grid Width="105" Margin="5">
+                <TextBlock Text="Phone" 
+            VerticalAlignment="Center" 
+            Foreground="#888" 
+            IsHitTestVisible="False"
+            Background="White" Height="28"/>
+                <TextBox x:Name="txtPhone"
+            Background="Transparent"
+            VerticalContentAlignment="Center"
+            GotFocus="txtInput_GotFocus" 
+            LostFocus="txtInput_LostFocus"
+/>
+            </Grid>
+
+
+
+
+
+
             <StackPanel Orientation="Horizontal" Margin="5" VerticalAlignment="Center">
                 <RadioButton x:Name="rbStatusActive" Content="Active" GroupName="StatusGroup" Margin="5"
-                         IsChecked="{Binding IsActive, Mode=TwoWay}" />
+                         />
                 <RadioButton x:Name="rbStatusInactive" Content="Inactive" GroupName="StatusGroup" Margin="5"
-                         IsChecked="{Binding IsActive, Mode=TwoWay}" />
+                         />
             </StackPanel>
 
         </StackPanel>
@@ -197,20 +264,20 @@
                     </StackPanel>
                 </Button>
 
-                <Grid Width="196" Height="46">
+                <Grid Width="250" Height="46">
                     <Grid.ColumnDefinitions>
                         <ColumnDefinition Width="*" />
                         <ColumnDefinition Width="Auto" />
                     </Grid.ColumnDefinitions>
                     <TextBox x:Name="txtSearch"
-                         FontSize="20"
+                         FontSize="16"
                          FontWeight="Medium"
                          FontFamily="Helvetica"
                          Height="40"
                          VerticalContentAlignment="Center"
-                         Width="180"
+                         Width="250"
                          Background="Transparent"
-                         BorderBrush="White"
+                         BorderBrush="Black"
                          HorizontalAlignment="Center"
                          GotFocus="txtSearch_GotFocus"
                          LostFocus="txtSearch_LostFocus" Margin="0,3,0,3">
@@ -222,7 +289,7 @@
                                             <Border Background="{TemplateBinding Background}"
                                                 BorderBrush="{TemplateBinding BorderBrush}"
                                                 BorderThickness="{TemplateBinding BorderThickness}"
-                                                CornerRadius="20">
+                                                CornerRadius="20" Margin="0,0,58,0">
                                                 <ScrollViewer x:Name="PART_ContentHost" />
                                             </Border>
                                         </ControlTemplate>
@@ -231,13 +298,13 @@
                             </Style>
                         </TextBox.Style>
                     </TextBox>
-                    <TextBlock x:Name="txtPlaceholder" Text="Enter name"
-                           Foreground="White"
+                    <TextBlock x:Name="txtPlaceholder" 
                            FontSize="15"
                            FontWeight="Medium"
                            FontFamily="Helvetica"
                            VerticalAlignment="Center"
-                           Margin="10,0,8,0"
+                           HorizontalAlignment="Left"
+                           Margin="18,0,0,0"
                            IsHitTestVisible="False" />
                 </Grid>
             </StackPanel>
