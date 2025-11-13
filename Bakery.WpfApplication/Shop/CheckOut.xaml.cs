@@ -1,4 +1,5 @@
-﻿using System;
+﻿using Bakery.Repository.Models;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -17,9 +18,9 @@ namespace Bakery.WpfApplication.Shop
     /// <summary>
     /// Interaction logic for CheckOut.xaml
     /// </summary>
-    public partial class CheckOut : Window
+    public partial class CheckOut : UserControl
     {
-        public CheckOut()
+        public CheckOut(Order order, List<OrderDetail> detailList, ShopWindow shopWindow)
         {
             InitializeComponent();
         }

@@ -16,6 +16,10 @@ namespace Bakery.Service
         {
             _repo = repo;
         }
+        public CategoryService()
+        {
+            _repo = new CategoryRepository();
+        }
 
         public void CreateCategory(Category category)
         {

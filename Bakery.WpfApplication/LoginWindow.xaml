@@ -29,7 +29,7 @@
                             <ColumnDefinition Width="*"/>
                             <ColumnDefinition Width="Auto"/>
                         </Grid.ColumnDefinitions>
-                        <TextBox x:Name="txtUser" 
+                        <TextBox x:Name="txtEmail" 
                             FontSize="20"
                             FontWeight="Medium"
                             FontFamily="Helvetica"                            
@@ -38,8 +38,8 @@
                             Width="480"
                             Background="#80B0B0B0"
                             HorizontalAlignment="Center"
-                            GotFocus="txtUser_GotFocus"
-                            LostFocus="txtUser_LostFocus">
+                            GotFocus="txtEmail_GotFocus"
+                            LostFocus="txtEmail_LostFocus">
                             <TextBox.Style>
                                 <Style TargetType="TextBox">
                                     <Setter Property="Template">

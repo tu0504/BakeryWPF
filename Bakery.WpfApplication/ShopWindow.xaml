@@ -67,7 +67,7 @@
             <Button x:Name="Bakery" 
                 Height="40" 
                 Margin="5,20,5,0" 
-                Content="Koi List" 
+                Content="Bakery List" 
                 Foreground="Black" 
                 Click="bakeryList_Click"/>
 

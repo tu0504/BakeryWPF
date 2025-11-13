@@ -1,4 +1,4 @@
-﻿using Bakery.Repository.Model;
+﻿using Bakery.Repository.Models;
 using Bakery.Repository.Repositories;
 using System;
 using System.Collections.Generic;
@@ -20,6 +20,11 @@ namespace Bakery.Service
     public class OrderDetailService
     {
         private readonly IOrderDetailRepo _orderDetailRepository;
+
+        public OrderDetailService()
+        {
+            
+        }
 
         public OrderDetailService(IOrderDetailRepo orderDetailRepository)
         {

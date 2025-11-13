@@ -19,7 +19,7 @@ namespace Bakery.WpfApplication
     /// </summary>
     public partial class AdminDashboardWindow : Window
     {
-        public AdminDashboardWindow()
+        public AdminDashboardWindow(string adminNames)
         {
             InitializeComponent();
         }

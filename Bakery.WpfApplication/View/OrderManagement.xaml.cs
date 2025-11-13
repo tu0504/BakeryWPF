@@ -17,7 +17,7 @@ namespace Bakery.WpfApplication.View
     /// <summary>
     /// Interaction logic for OrderManagement.xaml
     /// </summary>
-    public partial class OrderManagement : Window
+    public partial class OrderManagement : UserControl
     {
         public OrderManagement()
         {

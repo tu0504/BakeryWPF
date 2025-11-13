@@ -17,7 +17,7 @@ namespace Bakery.WpfApplication.View
     /// <summary>
     /// Interaction logic for BakeryManagement.xaml
     /// </summary>
-    public partial class BakeryManagement : Window
+    public partial class BakeryManagement : UserControl
     {
         public BakeryManagement()
         {

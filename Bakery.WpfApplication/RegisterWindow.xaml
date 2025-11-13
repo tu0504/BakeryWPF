@@ -184,7 +184,7 @@ IsHitTestVisible="False"/>
                                 </Style>
                             </TextBox.Style>
                         </TextBox>
-                        <TextBlock x:Name="txtPlaceholder" Text="Enter User Name"
+                        <TextBlock x:Name="txtPlaceholder" Text="Enter Email"
    Foreground="Black"
    FontSize="20"
    FontWeight="Medium"
