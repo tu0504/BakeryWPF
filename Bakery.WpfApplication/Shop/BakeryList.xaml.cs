@@ -96,7 +96,7 @@ namespace Bakery.WpfApplication.Shop
 
 
                 panel.Children.Add(new TextBlock { Text = product.ProductName, FontWeight = FontWeights.Bold, Margin = new Thickness(5) });
-                panel.Children.Add(new TextBlock { Text = $"Price: ${product.Price}", Margin = new Thickness(5) });
+                panel.Children.Add(new TextBlock { Text = $"Price: {product.Price}đ", Margin = new Thickness(5) });
 
                 Button btn = new Button { Content = "Add to cart", Width = 100, Margin = new Thickness(0, 5, 0, 0),
                     Background = Brushes.Orange,
@@ -117,7 +117,7 @@ namespace Bakery.WpfApplication.Shop
                     count++;
                     _shopWindow.AddOrderDetail(detail);
                     _shopWindow.UpdateCartItems(count);
-                    MessageBox.Show("Added to cart!");
+                    MessageBox.Show("Added to cart!", "Notice", MessageBoxButton.OK, MessageBoxImage.Information);
                 };
 
                 panel.Children.Add(btn);

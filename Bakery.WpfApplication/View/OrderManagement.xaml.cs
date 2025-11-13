@@ -1,4 +1,5 @@
-﻿using System;
+﻿using Bakery.Repository.Repositories;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -192,7 +193,7 @@ namespace Bakery.WpfApplication.View
                         {
                             using (var ctx = new Bakery.Repository.Context.BakeryContext())
                             {
-                                var repo = new Bakery.Repository.Repositories.OrderRepo(ctx);
+                                var repo = new OrderRepo();
                                 var fresh = repo.GetById(selectedOrder.OrderId);
                                 dgDetails.ItemsSource = fresh?.OrderDetails ?? new List<Bakery.Repository.Models.OrderDetail>();
                             }

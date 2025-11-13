@@ -30,7 +30,7 @@ namespace Bakery.Service
         // Delegate IUserService methods
         public List<User> GetAll() => _impl.GetAll();
         public User GetUserById(int id) => _impl.GetUserById(id);
-        public User GetUserByUserName(string userName) => _impl.GetUserByUserName(userName);
+        //public User GetUserByUserName(string userName) => _impl.GetUserByUserName(userName);
         public void SaveUser(User user) => _impl.SaveUser(user);
         public void DeleteCustomer(User user) => _impl.DeleteCustomer(user);
         public void UpdateCustomer(User user) => _impl.UpdateCustomer(user);

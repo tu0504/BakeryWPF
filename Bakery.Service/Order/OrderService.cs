@@ -72,8 +72,8 @@ namespace Bakery.Service
 
                 using (var ctx = new Bakery.Repository.Context.BakeryContext())
                 {
-                    var orderRepo = new Bakery.Repository.Repositories.OrderRepo(ctx);
-                    var orderDetailRepo = new Bakery.Repository.Repositories.OrderDetailRepo(ctx);
+                    var orderRepo = new OrderRepo();
+                    var orderDetailRepo = new OrderDetailRepo();
 
                     var existing = orderRepo.GetById(entity.OrderId);
                     if (existing == null)
