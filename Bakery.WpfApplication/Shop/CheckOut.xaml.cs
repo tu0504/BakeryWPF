@@ -17,11 +17,31 @@ namespace Bakery.WpfApplication.Shop
     /// <summary>
     /// Interaction logic for CheckOut.xaml
     /// </summary>
-    public partial class CheckOut : Window
+    public partial class CheckOut : UserControl
     {
         public CheckOut()
         {
             InitializeComponent();
+        }
+
+        private void btnCheckout(object sender, RoutedEventArgs e)
+        {
+
+        }
+
+        private void btnDeleteOrder(object sender, RoutedEventArgs e)
+        {
+
+        }
+
+        private void DgData_OnSelectionChanged(object sender, SelectionChangedEventArgs e)
+        {
+
+        }
+
+        private void OrderDetailManagement_OnLoaded(object sender, RoutedEventArgs e)
+        {
+
         }
     }
 }

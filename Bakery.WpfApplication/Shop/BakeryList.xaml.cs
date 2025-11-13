@@ -17,7 +17,7 @@ namespace Bakery.WpfApplication.Shop
     /// <summary>
     /// Interaction logic for BakeryList.xaml
     /// </summary>
-    public partial class BakeryList : Window
+    public partial class BakeryList : UserControl
     {
         public BakeryList()
         {

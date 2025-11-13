@@ -23,5 +23,75 @@ namespace Bakery.WpfApplication
         {
             InitializeComponent();
         }
+
+        private void txtPhone_TextChanged(object sender, TextChangedEventArgs e)
+        {
+
+        }
+
+        private void txtPhone_LostFocus(object sender, RoutedEventArgs e)
+        {
+
+        }
+
+        private void txtPhone_GotFocus(object sender, RoutedEventArgs e)
+        {
+
+        }
+
+        private void txtPass_GotFocus(object sender, RoutedEventArgs e)
+        {
+
+        }
+
+        private void txtPass_LostFocus(object sender, RoutedEventArgs e)
+        {
+
+        }
+
+        private void txtPassC_LostFocus(object sender, RoutedEventArgs e)
+        {
+
+        }
+
+        private void txtPassC_GotFocus(object sender, RoutedEventArgs e)
+        {
+
+        }
+
+        private void txtName_GotFocus(object sender, RoutedEventArgs e)
+        {
+
+        }
+
+        private void txtName_LostFocus(object sender, RoutedEventArgs e)
+        {
+
+        }
+
+        private void txtEmail_GotFocus(object sender, RoutedEventArgs e)
+        {
+
+        }
+
+        private void txtEmail_LostFocus(object sender, RoutedEventArgs e)
+        {
+
+        }
+
+        private void txtA_LostFocus(object sender, RoutedEventArgs e)
+        {
+
+        }
+
+        private void txtA_GotFocus(object sender, RoutedEventArgs e)
+        {
+
+        }
+
+        private void btnRegister_Click(object sender, RoutedEventArgs e)
+        {
+
+        }
     }
 }

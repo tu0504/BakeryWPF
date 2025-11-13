@@ -1,4 +1,5 @@
-﻿using Bakery.Repository.Model;
+﻿
+using Bakery.Repository.Models;
 using Microsoft.EntityFrameworkCore;
 using Repositories.Base;
 using System;

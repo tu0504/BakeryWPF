@@ -33,5 +33,25 @@ namespace Bakery.WpfApplication
         {
 
         }
+
+        private void txtUser_GotFocus(object sender, RoutedEventArgs e)
+        {
+
+        }
+
+        private void txtUser_LostFocus(object sender, RoutedEventArgs e)
+        {
+
+        }
+
+        private void txtPass_GotFocus(object sender, RoutedEventArgs e)
+        {
+
+        }
+
+        private void txtPass_LostFocus(object sender, RoutedEventArgs e)
+        {
+
+        }
     }
 }

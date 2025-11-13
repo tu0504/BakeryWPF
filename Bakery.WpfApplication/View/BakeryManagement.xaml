@@ -7,18 +7,18 @@
         mc:Ignorable="d"
         Loaded="BakeryManagement_OnLoaded"
         Height="416" Width="900">
-    <Grid>
+    <Grid Margin="0,-1,0,1">
         <Grid.RowDefinitions>
             <RowDefinition Height="*" />
             <RowDefinition Height="50" />
             <RowDefinition Height="60" />
         </Grid.RowDefinitions>
 
-        <!-- Fish/Koi DataGrid -->
+        
         <DataGrid x:Name="dgData" Grid.Row="0" ItemsSource="{Binding bakeryList}"
                   AutoGenerateColumns="False" IsReadOnly="False"
                   SelectionChanged="DgData_OnSelectionChanged"
-                  CanUserAddRows="False">
+                  CanUserAddRows="False" Loaded="dgData_Loaded">
             <DataGrid.Columns>
                 <DataGridTextColumn Header="ID" Binding="{Binding ProductID}" Width="50" IsReadOnly="True" />
                 <DataGridTextColumn Header="Name" Binding="{Binding ProductName}" Width="100" />
@@ -29,7 +29,7 @@
                         </DataTemplate>
                     </DataGridTemplateColumn.CellTemplate>
                 </DataGridTemplateColumn>
-                <!-- <DataGridTextColumn Header="Quantity" Binding="{Binding KoiFishQuantity}" Width="70" /> -->
+                
                 <DataGridTextColumn Header="Description" Binding="{Binding Description}" Width="100" />
                 <DataGridTextColumn Header="Price" Binding="{Binding Price}" Width="70" />
                 <DataGridTextColumn Header="Stock" Binding="{Binding Stock}" Width="100" />

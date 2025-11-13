@@ -20,5 +20,20 @@ namespace Bakery.WpfApplication
         {
             InitializeComponent();
         }
+
+        private void logOut_Click(object sender, RoutedEventArgs e)
+        {
+
+        }
+
+        private void btnShoppingClick(object sender, RoutedEventArgs e)
+        {
+
+        }
+
+        private void bakeryList_Click(object sender, RoutedEventArgs e)
+        {
+
+        }
     }
 }

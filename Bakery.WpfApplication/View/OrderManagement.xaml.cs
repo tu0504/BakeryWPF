@@ -17,11 +17,36 @@ namespace Bakery.WpfApplication.View
     /// <summary>
     /// Interaction logic for OrderManagement.xaml
     /// </summary>
-    public partial class OrderManagement : Window
+    public partial class OrderManagement : UserControl
     {
         public OrderManagement()
         {
             InitializeComponent();
+        }
+
+        private void OrderManagement_OnLoaded(object sender, RoutedEventArgs e)
+        {
+
+        }
+
+        private void DgDetails_OnSelectionChanged(object sender, SelectionChangedEventArgs e)
+        {
+
+        }
+
+        private void DgData_OnSelectionChanged(object sender, SelectionChangedEventArgs e)
+        {
+
+        }
+
+        private void btnDeleteOrderDetail(object sender, RoutedEventArgs e)
+        {
+
+        }
+
+        private void btnDeleteOrder(object sender, RoutedEventArgs e)
+        {
+
         }
     }
 }

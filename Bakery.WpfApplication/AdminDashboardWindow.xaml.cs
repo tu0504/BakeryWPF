@@ -1,16 +1,7 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
+﻿using Bakery.Repository.Models;
+using Bakery.Service;
 using System.Windows;
-using System.Windows.Controls;
-using System.Windows.Data;
-using System.Windows.Documents;
-using System.Windows.Input;
-using System.Windows.Media;
-using System.Windows.Media.Imaging;
-using System.Windows.Shapes;
+
 
 namespace Bakery.WpfApplication
 {
@@ -19,10 +10,22 @@ namespace Bakery.WpfApplication
     /// </summary>
     public partial class AdminDashboardWindow : Window
     {
+        public ProductService _productService;
+        public CategoryService _categoryService;
+
         public AdminDashboardWindow()
         {
             InitializeComponent();
+           
         }
+        public AdminDashboardWindow(ProductService productService, CategoryService categoryService)
+        {
+            InitializeComponent();
+            _productService = productService;
+            _categoryService = categoryService;
+           
+        }
+
 
         private void btnHome_OnClick(object sender, RoutedEventArgs e)
         {
@@ -36,7 +39,7 @@ namespace Bakery.WpfApplication
 
         private void btnBakery_Click(object sender, RoutedEventArgs e)
         {
-
+            ContentArea.Content = new View.BakeryManagement(_productService, _categoryService);
         }
 
         private void btnOrder_Click(object sender, RoutedEventArgs e)

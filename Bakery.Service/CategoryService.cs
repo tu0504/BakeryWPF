@@ -10,31 +10,32 @@ namespace Bakery.Service
 {
     public class CategoryService
     {
-        public CategoryRepository _repo;
+        private CategoryRepository _repo;
 
-        public CategoryService (CategoryRepository repo)
-        {
-            _repo = repo;
-        }
-
+       
         public void CreateCategory(Category category)
         {
+            _repo = new();
             _repo.Create(category);
         }
         public void UpdateCategory(Category category)
         {
+            _repo = new();
             _repo.Update(category);
         }
         public void DeleteCategory(Category category)
         {
+            _repo = new();
             _repo.Delete(category);
         }
         public List<Category> GetAllCategories()
         {
+            _repo = new();
             return _repo.GetAll();
         }
         public Category GetCategoryById (int id)
         {
+            _repo = new();
             return _repo.GetById(id);
         }
     }

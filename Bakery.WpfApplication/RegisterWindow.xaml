@@ -78,7 +78,7 @@
                          Background="#80B0B0B0"
                          HorizontalAlignment="Center"
                          GotFocus="txtPhone_GotFocus"
-                         LostFocus="txtPhone_LostFocus">
+                         LostFocus="txtPhone_LostFocus" TextChanged="txtPhone_TextChanged">
                             <TextBox.Style>
                                 <Style TargetType="TextBox">
                                     <Setter Property="Template">

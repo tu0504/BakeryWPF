@@ -10,15 +10,16 @@ namespace Bakery.Service
 {
     public class ProductService
     {
-        private readonly ProductRepository _productRepository;
+        private  ProductRepository _productRepository = new();
 
-        public ProductService()
-        {
-            _productRepository = new ProductRepository();
-        }
+        //public ProductService(ProductRepository productRepository)
+        //{
+        //    _productRepository = productRepository;
+        //}
 
         public List<Product> GetAllProducts()
         {
+            
             return _productRepository.GetAll();
         }
 
