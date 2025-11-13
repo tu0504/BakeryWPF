@@ -21,6 +21,11 @@ namespace Bakery.Service
     {
         private readonly IOrderDetailRepo _orderDetailRepository;
 
+        public OrderDetailService()
+        {
+            
+        }
+
         public OrderDetailService(IOrderDetailRepo orderDetailRepository)
         {
             _orderDetailRepository = orderDetailRepository;

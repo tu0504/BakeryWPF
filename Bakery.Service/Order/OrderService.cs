@@ -20,7 +20,10 @@ namespace Bakery.Service
     public class OrderService : IOrderService
     {
         private readonly IOrderRepo _orderRepo;
-
+        public OrderService()
+        {
+            
+        }
         public OrderService(IOrderRepo orderRepo)
         {
             _orderRepo = orderRepo;

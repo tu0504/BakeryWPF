@@ -9,6 +9,11 @@ namespace Bakery.Repository.Repositories
     {
         public BakeryContext _context;
 
+        public CategoryRepository()
+        {
+            
+        }
+
         public CategoryRepository(BakeryContext context) { _context = context; }
 
         public List<Category> GetAll()
