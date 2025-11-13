@@ -22,31 +22,39 @@ namespace Bakery.WpfApplication.Shop
     /// </summary>
     public partial class BakeryList : UserControl
     {
-        private readonly ProductService productService;
-        private readonly OrderDetailService orderDetailService;
-        private readonly OrderService orderService;
+        private readonly ProductService _productService;
+        private readonly OrderDetailService _orderDetailService;
+        private readonly OrderService _orderService;
+        private readonly CategoryService _categoryService;
         private readonly ShopWindow _shopWindow;
         private Order _order;
         private int count;
-        public BakeryList(Order order, int cartItems, ShopWindow shopWindow)
+        private int cartItems;
+
+        public BakeryList(Order order, int cartItems, ShopWindow shopWindow,
+                  OrderService orderService, ProductService productService,
+                  OrderDetailService orderDetailService, CategoryService categoryService)
         {
             InitializeComponent();
-            productService = new ProductService();
-            orderDetailService = new OrderDetailService();
-            orderService = new OrderService();
+
             _order = order;
             count = cartItems;
             _shopWindow = shopWindow;
 
-            LoadProducts();
+            _orderService = orderService;
+            _productService = productService;
+            _orderDetailService = orderDetailService;
+            _categoryService = categoryService;
+
+            LoadProducts(); // gọi sau khi tất cả service đã sẵn sàng
         }
+
 
         private void LoadProducts()
         {
-            using var db = new BakeryContext();
-            var category = new CategoryService();
-            List<Product> productList = productService.GetAllProducts().ToList();
-
+            //MessageBox.Show("BakeryList.LoadProducts() called!");
+            List<Product> productList = _productService.GetAllProducts().ToList();
+            //MessageBox.Show($"Products loaded: {productList.Count}");
             foreach (var product in productList)
             {
                 Border productBorder = new Border
@@ -55,21 +63,27 @@ namespace Bakery.WpfApplication.Shop
                     BorderThickness = new Thickness(2),
                     CornerRadius = new CornerRadius(5),
                     Margin = new Thickness(10),
-                    Width = 200
+                    Width = 180,
+                    MinHeight = 250,
+                    Background = Brushes.White
                 };
 
-                StackPanel productPanel = new StackPanel { Margin = new Thickness(10) };
+                StackPanel productPanel = new StackPanel { Margin = new Thickness(5) };
 
                 if (!string.IsNullOrEmpty(product.ImageUrl))
                 {
-                    Image productImage = new Image
+                    try
                     {
-                        Source = new BitmapImage(new Uri(product.ImageUrl, UriKind.RelativeOrAbsolute)),
-                        Width = 100,
-                        Height = 150,
-                        Margin = new Thickness(5)
-                    };
-                    productPanel.Children.Add(productImage);
+                        Image productImage = new Image
+                        {
+                            Source = new BitmapImage(new System.Uri(product.ImageUrl, System.UriKind.RelativeOrAbsolute)),
+                            Width = 150,
+                            Height = 120,
+                            Margin = new Thickness(5)
+                        };
+                        productPanel.Children.Add(productImage);
+                    }
+                    catch { }
                 }
 
                 // Hiển thị thông tin sản phẩm
@@ -78,7 +92,7 @@ namespace Bakery.WpfApplication.Shop
                 productPanel.Children.Add(new TextBlock { Text = $"Price: ${product.Price}", Margin = new Thickness(5) });
                 productPanel.Children.Add(new TextBlock { Text = $"Stock: {product.Stock}", Margin = new Thickness(5) });
 
-                string categoryName = category.GetCategoryById(product.CategoryId).CategoryName;
+                string categoryName = _categoryService.GetCategoryById(product.CategoryId).CategoryName;
                 productPanel.Children.Add(new TextBlock { Text = $"Category: {categoryName}", Margin = new Thickness(5) });
 
                 productBorder.Child = productPanel;
@@ -87,7 +101,7 @@ namespace Bakery.WpfApplication.Shop
                 Button buttonCard = new Button
                 {
                     Content = "Add to cart",
-                    Margin = new Thickness(0, 20, 0, 0),
+                    Margin = new Thickness(0, 10, 0, 0),
                     Height = 30,
                     Width = 100
                 };
@@ -139,6 +153,7 @@ namespace Bakery.WpfApplication.Shop
                 //};
 
                 //productPanel.Children.Add(buttonBuy);
+                productBorder.Child = productPanel;
                 DataWrapPanel.Children.Add(productBorder);
             }
         }
