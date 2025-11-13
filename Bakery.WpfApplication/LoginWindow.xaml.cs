@@ -1,6 +1,4 @@
-﻿using Bakery.Repository.Models;
-using Bakery.Service;
-using System;
+﻿using Bakery.Service;
 using System.Windows;
 
 namespace Bakery.WpfApplication

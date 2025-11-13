@@ -24,26 +24,21 @@ namespace Bakery.WpfApplication
         private readonly ProductService _productService;
         private readonly OrderDetailService _orderDetailService;
         private readonly CategoryService _categoryService;
-        private readonly User user;
-        private Order order;
-        private List<OrderDetail> orderDetails = new List<OrderDetail>();
 
-        public ShopWindow(User user, UserService userService, OrderService orderService, OrderDetailService orderDetailService, ProductService productService, CategoryService categoryService)
+        public User _currentUser = new User();
+        public Order _currentOrder = new Order();
+        public List<OrderDetail> _orderDetails = new List<OrderDetail>();
+
+        public ShopWindow(User user)
         {
             InitializeComponent();
-            _userServices = userService;
-            _productService = productService;
-            _orderDetailService = orderDetailService;
-            Login.Content = $"Hello, {user.UserName}";
-            _orderService = orderService;
-            orderDetails = new List<OrderDetail>();
-            order = new Order();
-            this.user = user;
-            _categoryService = categoryService;
-        }
-        public ShopWindow(User user)
-    : this(user, new UserService(), new OrderService(), new OrderDetailService(), new ProductService(), new CategoryService())
-        {
+            _currentUser = user;
+            Login.Content = $"Hello, {_currentUser.UserName}";
+            _userServices = new UserService();
+            _productService = new ProductService();
+            _orderDetailService = new OrderDetailService();
+            _orderService = new OrderService();
+            _categoryService = new CategoryService();
         }
 
         public void UpdateCartItems(int count)
@@ -55,7 +50,7 @@ namespace Bakery.WpfApplication
         {
             if (e.ChangedButton == MouseButton.Left)
             {
-                this.DragMove();
+                DragMove();
             }
         }
         private bool IsMaximize = false;
@@ -65,15 +60,15 @@ namespace Bakery.WpfApplication
             {
                 if (IsMaximize)
                 {
-                    this.WindowState = WindowState.Normal;
-                    this.Width = 1250;
-                    this.Height = 830;
-
+                    WindowState = WindowState.Normal;
+                    Width = 1250;
+                    Height = 830;
+                   
                     IsMaximize = false;
                 }
                 else
                 {
-                    this.WindowState = WindowState.Maximized;
+                    WindowState = WindowState.Maximized;
 
                     IsMaximize = true;
                 }
@@ -82,9 +77,9 @@ namespace Bakery.WpfApplication
 
         private void bakeryList_Click(object sender, RoutedEventArgs e)
         {
-            order = new Order
+            _currentOrder = new Order
             {
-                UserId = user.UserId,
+                UserId = _currentUser.UserId,
                 OrderDate = DateTime.Now,
                 TotalAmount = 0,
                 Status = "Pending"
@@ -93,7 +88,7 @@ namespace Bakery.WpfApplication
             int cartItems = int.Parse(CartItems.Text);
 
             ContentArea.Content = new BakeryList(
-                order,
+                _currentOrder,
                 cartItems,
                 this,
                 _orderService,
@@ -106,24 +101,118 @@ namespace Bakery.WpfApplication
 
         public void AddOrderDetail(OrderDetail orderDetail)
         {
-            orderDetails.Add(orderDetail);
-        }
+            // Load the Product if it's not already loaded
+            if (orderDetail.Product == null && orderDetail.ProductId > 0)
+            {
+                orderDetail.Product = _productService.GetProductById(orderDetail.ProductId);
+            }
 
-        private void btnShoppingClick(object sender, RoutedEventArgs e)
-        {
-            ContentArea.Content = new Shop.CheckOut(order, orderDetails, _productService, _orderDetailService ,_orderService, this);
+            // Check if the product already exists in the cart
+            var existingOrderDetail = _orderDetails.FirstOrDefault(od => od.ProductId == orderDetail.ProductId);
+
+            if (existingOrderDetail != null)
+            {
+                // Product already exists, increase the quantity
+                existingOrderDetail.Quantity += orderDetail.Quantity;
+            }
+            else
+            {
+                // Product doesn't exist, add it to the cart
+                _orderDetails.Add(orderDetail);
+            }
         }
 
         private void logOut_Click(object sender, RoutedEventArgs e)
         {
             LoginWindow login = new LoginWindow();
             login.Show();
-            this.Close();
+            Close();
         }
 
-        private void CloseButton(object sender, RoutedEventArgs e)
+        private void btnBuy_Click(object sender, RoutedEventArgs e)
         {
-            Close();
+            try
+            {
+                // Validate cart is not empty
+                if (_orderDetails == null || _orderDetails.Count == 0)
+                {
+                    MessageBox.Show("Your cart is empty. Please add products before checking out.",
+                        "Warning", MessageBoxButton.OK, MessageBoxImage.Warning);
+                    return;
+                }
+
+                // Calculate total amount
+                decimal totalAmount = _orderDetails.Sum(od => od.Quantity * od.UnitPrice);
+
+                // Confirm quick checkout
+                var result = MessageBox.Show(
+                    $"Quick Checkout\n\nItems in cart: {_orderDetails.Count}\nTotal Amount: {totalAmount:C}\n\nDo you want to complete this order?",
+                    "Confirm Quick Checkout",
+                    MessageBoxButton.YesNo,
+                    MessageBoxImage.Question);
+
+                if (result == MessageBoxResult.No)
+                {
+                    return;
+                }
+
+                // Create the order with all order details
+                var newOrder = new Order
+                {
+                    UserId = _currentUser.UserId,
+                    OrderDate = DateTime.Now,
+                    TotalAmount = totalAmount,
+                    Status = "Completed"
+                };
+
+                // Add all order details to the order before saving
+                foreach (var orderDetail in _orderDetails)
+                {
+                    var newOrderDetail = new OrderDetail
+                    {
+                        ProductId = orderDetail.ProductId,
+                        Quantity = orderDetail.Quantity,
+                        UnitPrice = orderDetail.UnitPrice
+                    };
+
+                    newOrder.OrderDetails.Add(newOrderDetail);
+                }
+
+                // Save the complete order with all order details in one transaction
+                _orderService.Create(newOrder);
+
+                // Update product stock
+                foreach (var orderDetail in _orderDetails)
+                {
+                    var product = _productService.GetProductById(orderDetail.ProductId);
+                    if (product != null)
+                    {
+                        product.Stock -= orderDetail.Quantity;
+                        _productService.UpdateProduct(product);
+                    }
+                }
+
+                // Show success message
+                MessageBox.Show(
+                    $"Order completed successfully!\n\nTotal Amount: {totalAmount:C}\n\nThank you for your purchase!",
+                    "Success",
+                    MessageBoxButton.OK,
+                    MessageBoxImage.Information);
+
+                // Clear the cart
+                _orderDetails.Clear();
+                UpdateCartItems(0);
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show($"An error occurred during quick checkout: {ex.Message}",
+                    "Error", MessageBoxButton.OK, MessageBoxImage.Error);
+            }
+        }
+
+        private void btnShoppingCart_Click(object sender, RoutedEventArgs e)
+        {
+            ContentArea.Content = new CheckOut(this, _currentOrder, _orderDetails);
         }
     }
 }

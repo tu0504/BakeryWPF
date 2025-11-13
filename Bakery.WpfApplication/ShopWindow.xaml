@@ -32,37 +32,37 @@
             <TextBlock x:Name="CartItems" Height="19" TextWrapping="Wrap" Text="0" Width="10" FontSize="18" Margin="42,0,0,0" />
             <Button x:Name="btnShoppingCart" Height="43" Width="46" 
                 Background="Transparent" BorderBrush="Transparent"
-                HorizontalAlignment="Left" Margin="19,0,0,0">
+                HorizontalAlignment="Left" Margin="19,0,0,0" Click="btnShoppingCart_Click">
                 <StackPanel Orientation="Horizontal" Height="39" Width="146">
                     <Image Source="/Images/shoppingcart.png" Width="44" Height="40" Stretch="Uniform" VerticalAlignment="Center"/>
                 </StackPanel>
             </Button>
 
-            <!-- <Button x:Name="btnBuy" Content="Buy" -->
-            <!--         Width="96" Height="40"  -->
-            <!--         Click="Button_Click" Margin="0,20,0,0"> -->
-            <!--     <Button.Background> -->
-            <!--         <SolidColorBrush Color="#0099FF" /> -->
-            <!--     </Button.Background> -->
-            <!--     <Button.Triggers> -->
-            <!--         <EventTrigger RoutedEvent="MouseEnter"> -->
-            <!--             <BeginStoryboard> -->
-            <!--                 <Storyboard> -->
-            <!--                     <ColorAnimation Storyboard.TargetProperty="(Button.Background).(SolidColorBrush.Color)" -->
-            <!--                                     To="#28AEED" Duration="0:0:0.2"/> -->
-            <!--                 </Storyboard> -->
-            <!--             </BeginStoryboard> -->
-            <!--         </EventTrigger> -->
-            <!--         <EventTrigger RoutedEvent="MouseLeave"> -->
-            <!--             <BeginStoryboard> -->
-            <!--                 <Storyboard> -->
-            <!--                     <ColorAnimation Storyboard.TargetProperty="(Button.Background).(SolidColorBrush.Color)" -->
-            <!--                                     To="#0099FF" Duration="0:0:0.2"/> -->
-            <!--                 </Storyboard> -->
-            <!--             </BeginStoryboard> -->
-            <!--         </EventTrigger> -->
-            <!--     </Button.Triggers> -->
-            <!-- </Button> -->
+             <Button x:Name="btnBuy" Content="Buy" 
+                     Width="96" Height="40"  
+                     Margin="0,20,0,0" Click="btnBuy_Click"> 
+                 <Button.Background> 
+                     <SolidColorBrush Color="#0099FF" /> 
+                 </Button.Background> 
+                 <Button.Triggers> 
+                     <EventTrigger RoutedEvent="MouseEnter"> 
+                         <BeginStoryboard> 
+                             <Storyboard> 
+                                 <ColorAnimation Storyboard.TargetProperty="(Button.Background).(SolidColorBrush.Color)" 
+                                                 To="#28AEED" Duration="0:0:0.2"/> 
+                             </Storyboard> 
+                         </BeginStoryboard> 
+                     </EventTrigger> 
+                     <EventTrigger RoutedEvent="MouseLeave"> 
+                         <BeginStoryboard> 
+                             <Storyboard> 
+                                 <ColorAnimation Storyboard.TargetProperty="(Button.Background).(SolidColorBrush.Color)" 
+                                                 To="#0099FF" Duration="0:0:0.2"/> 
+                             </Storyboard> 
+                         </BeginStoryboard> 
+                     </EventTrigger> 
+                 </Button.Triggers> 
+             </Button> 
 
             <Button x:Name="Bakery" 
                 Height="40" 

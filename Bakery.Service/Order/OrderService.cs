@@ -22,7 +22,7 @@ namespace Bakery.Service
         private readonly IOrderRepo _orderRepo;
         public OrderService()
         {
-            
+            _orderRepo = new OrderRepo();
         }
         public OrderService(IOrderRepo orderRepo)
         {
