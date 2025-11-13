@@ -1,4 +1,5 @@
-﻿using System;
+﻿using Bakery.Repository.Models;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -19,29 +20,24 @@ namespace Bakery.WpfApplication.Shop
     /// </summary>
     public partial class CheckOut : UserControl
     {
-        public CheckOut()
+        public CheckOut(Order order, List<OrderDetail> detailList, ShopWindow shopWindow)
         {
             InitializeComponent();
         }
-
         private void btnCheckout(object sender, RoutedEventArgs e)
         {
-
+           
         }
 
+       
         private void btnDeleteOrder(object sender, RoutedEventArgs e)
         {
-
+     
+         
         }
-
         private void DgData_OnSelectionChanged(object sender, SelectionChangedEventArgs e)
         {
-
-        }
-
-        private void OrderDetailManagement_OnLoaded(object sender, RoutedEventArgs e)
-        {
-
+           
         }
     }
 }

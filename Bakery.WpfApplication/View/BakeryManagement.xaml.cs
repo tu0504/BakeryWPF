@@ -93,5 +93,17 @@ namespace Bakery.WpfApplication.View
         {
             LoadProduct();
         }
+        private void txtSearch_GotFocus(object sender, RoutedEventArgs e)
+        {
+            txtPlaceholder.Visibility = Visibility.Collapsed;
+        }
+
+        private void txtSearch_LostFocus(object sender, RoutedEventArgs e)
+        {
+            if (string.IsNullOrWhiteSpace(txtSearch.Text))
+            {
+                txtPlaceholder.Visibility = Visibility.Visible;
+            }
+        }
     }
 }

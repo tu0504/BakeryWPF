@@ -85,7 +85,7 @@
 
         <ContentControl x:Name="ContentArea" HorizontalAlignment="Right" 
                     Margin="0,70,-1,0" 
-                    VerticalAlignment="Top" Width="1250" Height="416" />
+                    VerticalAlignment="Top" Width="1250" Height="510" />
 
 
     </Grid>

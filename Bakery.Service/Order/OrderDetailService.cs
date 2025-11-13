@@ -1,5 +1,4 @@
-﻿
-using Bakery.Repository.Models;
+﻿using Bakery.Repository.Models;
 using Bakery.Repository.Repositories;
 using System;
 using System.Collections.Generic;

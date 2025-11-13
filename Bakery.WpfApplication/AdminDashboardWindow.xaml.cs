@@ -34,9 +34,8 @@ namespace Bakery.WpfApplication
 
         private void btnUser_Click(object sender, RoutedEventArgs e)
         {
-
+            ContentArea.Content = new View.UserManagement(_userService);
         }
-
         private void btnBakery_Click(object sender, RoutedEventArgs e)
         {
             ContentArea.Content = new View.BakeryManagement(_productService, _categoryService);

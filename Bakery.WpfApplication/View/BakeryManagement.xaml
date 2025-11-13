@@ -5,9 +5,8 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:Bakery.WpfApplication.View"
         mc:Ignorable="d"
-        Loaded="BakeryManagement_OnLoaded"
         Height="416" Width="900">
-    <Grid Margin="0,-1,0,1">
+    <Grid>
         <Grid.RowDefinitions>
             <RowDefinition Height="*" />
             <RowDefinition Height="50" />
@@ -17,8 +16,8 @@
         
         <DataGrid x:Name="dgData" Grid.Row="0" ItemsSource="{Binding bakeryList}"
                   AutoGenerateColumns="False" IsReadOnly="False"
-                  SelectionChanged="DgData_OnSelectionChanged"
-                  CanUserAddRows="False" Loaded="dgData_Loaded">
+                  
+                  CanUserAddRows="False">
             <DataGrid.Columns>
                 <DataGridTextColumn Header="ID" Binding="{Binding ProductID}" Width="50" IsReadOnly="True" />
                 <DataGridTextColumn Header="Name" Binding="{Binding ProductName}" Width="100" />
@@ -40,7 +39,7 @@
 
         <!-- Form for adding or editing fish -->
         <StackPanel Grid.Row="2" Orientation="Horizontal" Margin="50,5,50,0">
-            <Button Content="Add Koi" Width="155" Margin="5" Click="btnCreateKoi">
+            <Button Content="Add Koi" Width="155" Margin="5" >
                 <Button.Background>
                     <SolidColorBrush Color="#0099FF" />
                 </Button.Background>
@@ -63,7 +62,7 @@
                     </EventTrigger>
                 </Button.Triggers>
             </Button>
-            <Button Content="Update Koi" Width="155" Margin="5" Click="btnUpdateKoi">
+            <Button Content="Update Koi" Width="155" Margin="5" >
                 <Button.Background>
                     <SolidColorBrush Color="#FF1B7140" />
                 </Button.Background>
@@ -86,7 +85,7 @@
                     </EventTrigger>
                 </Button.Triggers>
             </Button>
-            <Button Content="Delete Koi" Width="155" Margin="5" Padding="5" Click="btnDeleteKoi">
+            <Button Content="Delete Koi" Width="155" Margin="5" Padding="5" >
                 <Button.Background>
                     <SolidColorBrush Color="#FFA2AA3D" />
                 </Button.Background>
@@ -112,7 +111,7 @@
             <StackPanel Height="44" Width="356" Margin="20,0,0,0" Orientation="Horizontal">
                 <Button x:Name="btnSearch" Height="46" Width="46"
                         Background="Transparent" BorderBrush="Transparent"
-                        HorizontalAlignment="Left" Click="btnSearch_Click">
+                        HorizontalAlignment="Left" >
                     <StackPanel Orientation="Horizontal" Height="39" Width="151" RenderTransformOrigin="0.13,0.472">
                         <Image Source="/Images/search.png" Width="44" Height="40" Stretch="Uniform"
                                VerticalAlignment="Center" />
@@ -173,7 +172,7 @@
             <TextBox x:Name="BakeryName" Width="100" Margin="5" />
             <StackPanel Orientation="Horizontal">
                 <TextBox x:Name="Image" Width="110" Margin="5" IsReadOnly="True" />
-                <Button Content="Browse" Width="75" Margin="5" Click="BrowseImage_Click" />
+                <Button Content="Browse" Width="75" Margin="5" />
             </StackPanel>
             <TextBox x:Name="Description" Width="100" Margin="5" />
             <TextBox x:Name="Price" Width="70" Margin="5" />
