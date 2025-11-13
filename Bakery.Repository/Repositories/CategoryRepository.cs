@@ -18,6 +18,7 @@ namespace Bakery.Repository.Repositories
 
         public List<Category> GetAll()
         {
+            _context = new BakeryContext();
             return _context.Categories.ToList();
         }
 
