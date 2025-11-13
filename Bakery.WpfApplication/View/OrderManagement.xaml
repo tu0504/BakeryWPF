@@ -26,8 +26,8 @@
             CanUserAddRows="False">
             <DataGrid.Columns>
                 <DataGridTextColumn Header="Order Id" Binding="{Binding OrderId}" Width="80" IsReadOnly="True"/>
-                <DataGridTextColumn Header="Order Date" Binding="{Binding Date}" Width="100" />
-                <DataGridTextColumn Header="Total Money" Binding="{Binding TotalMoney}" Width="100"/>
+                <DataGridTextColumn Header="Order Date" Binding="{Binding OrderDate}" Width="140" />
+                <DataGridTextColumn Header="Total Amount" Binding="{Binding TotalAmount}" Width="120"/>
                 <DataGridTextColumn Header="User Name" Binding="{Binding User.UserName}" Width="100"/>
                 <DataGridTextColumn Header="Status" Binding="{Binding Status}" Width="*"/>
             </DataGrid.Columns>
@@ -69,7 +69,7 @@
               CanUserAddRows="False">
             <DataGrid.Columns>
                 <DataGridTextColumn Header="Order Id" Binding="{Binding Order.OrderId}" Width="80" IsReadOnly="True"/>
-                <DataGridTextColumn Header="Bakery Name" Binding="{Binding ProductProductName}" Width="100" />
+                <DataGridTextColumn Header="Bakery Name" Binding="{Binding Product.ProductName}" Width="200" />
                 <DataGridTextColumn Header="Quantity" Binding="{Binding Quantity}" Width="100"/>
                 <DataGridTextColumn Header="Price" Binding="{Binding UnitPrice}" Width="60"/>
             </DataGrid.Columns>
