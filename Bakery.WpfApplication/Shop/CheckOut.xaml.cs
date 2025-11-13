@@ -1,4 +1,5 @@
 ﻿using Bakery.Repository.Models;
+using Bakery.Service;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -20,7 +21,7 @@ namespace Bakery.WpfApplication.Shop
     /// </summary>
     public partial class CheckOut : UserControl
     {
-        public CheckOut(Order order, List<OrderDetail> detailList, ShopWindow shopWindow)
+        public CheckOut(Order order, List<OrderDetail> detailList, ProductService productService, OrderDetailService orderDetailService, OrderService orderService, ShopWindow shopWindow)
         {
             InitializeComponent();
         }
