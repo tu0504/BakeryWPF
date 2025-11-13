@@ -1,5 +1,9 @@
 ﻿using Bakery.Repository.Models;
+using Bakery.Repository.Repositories.Implement;
+using Bakery.Repository.Repositories.Interface;
 using Bakery.Service;
+using Bakery.Service.Implement;
+using Bakery.Service.Interface;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -21,62 +25,79 @@ namespace Bakery.WpfApplication
     /// </summary>
     public partial class LoginWindow : Window
     {
-        private readonly UserService _userService;
+        private IUserService? _userService;
         public LoginWindow()
         {
             InitializeComponent();
-            _userService = new UserService();
+            try
+            {
+                IUserRepository userRepository = new UserRepository();
+                _userService = new UserServices(userRepository);
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show($"Failed to create default services: {ex.Message}", "Initialization error", MessageBoxButton.OK, MessageBoxImage.Error);
+                _userService = null;
+            }
+        }
+        public LoginWindow(IUserService userService)
+        {
+            InitializeComponent();
+            _userService = userService;
         }
 
         private void btnRegister_Click(object sender, RoutedEventArgs e)
         {
+            RegisterWindow regis = new();
+            regis.ShowDialog();
 
-                if (user != null)
-                {
-                    // Kiểm tra vai trò
-                    if (user.Role.Equals("AD"))
-                    {
-                        this.Hide();
-                        AdminDashboardWindow admin = new AdminDashboardWindow(user.UserName);
-                        admin.Show();
-                    }
-                    else if (user.Role.Equals("US"))
-                    {
-                        this.Hide();
-                        ShopWindow shopWindow = new ShopWindow(user);
-                        shopWindow.Show();
-                    }
-                    else
-                    {
-                        MessageBox.Show("User role not recognized!", "Error", MessageBoxButton.OK, MessageBoxImage.Error);
-                    }
-                }
-                else
-                {
-                    MessageBox.Show("Email or password is incorrect!", "Login Failed", MessageBoxButton.OK, MessageBoxImage.Warning);
-                }
-            }
-            catch (Exception ex)
+        }
+
+        private void btnLogin_Click(object sender, RoutedEventArgs e)
+        {
+
+            string email = txtEmail.Text.Trim();
+            string password = txtPass.Password;
+            if (string.IsNullOrWhiteSpace(email) || string.IsNullOrWhiteSpace(password))
             {
-                MessageBox.Show($"Error: {ex.Message}", "Login Error", MessageBoxButton.OK, MessageBoxImage.Error);
+                MessageBox.Show("Please enter full Email and Password.", "Missing information", MessageBoxButton.OK, MessageBoxImage.Warning);
+                return;
             }
-        }
-
-        private void txtEmail_GotFocus(object sender, RoutedEventArgs e)
-        {
-            txtPlaceholder.Visibility = Visibility.Collapsed;
-        }
-
-        private void txtEmail_LostFocus(object sender, RoutedEventArgs e)
-        {
-            if (string.IsNullOrEmpty(txtEmail.Text))
+            try
             {
-                txtPlaceholder.Visibility = Visibility.Visible;
+
+            User? authenticatedUser = _userService.AuthenticateUser(email, password);
+
+            if (authenticatedUser != null)
+            {
+
+                if (authenticatedUser.Status == false)
+                {
+                    MessageBox.Show("Your account has been locked. Please contact your administrator.", "Access denied", MessageBoxButton.OK, MessageBoxImage.Warning);
+                    return;
+                }
+                if (authenticatedUser.Role == "AD")
+                {
+                    AdminDashboardWindow admin = new();
+                    admin.Show();
+                    this.Hide();
+                }
+                
+                MessageBox.Show($"Login successful! Welcome, {authenticatedUser.FullName}.", "Success", MessageBoxButton.OK, MessageBoxImage.Information);
+
+                
+            }
+            else
+            {
+                // Lỗi xác thực (User không tồn tại hoặc mật khẩu sai)
+                MessageBox.Show("Email hoặc mật khẩu không chính xác.", "Lỗi đăng nhập", MessageBoxButton.OK, MessageBoxImage.Error);
             }
         }
-        private void txtPass_GotFocus(object sender, RoutedEventArgs e)
-        {
-
-        }
+    catch (Exception ex)
+    {
+        MessageBox.Show($"Lỗi hệ thống: {ex.Message}", "Lỗi", MessageBoxButton.OK, MessageBoxImage.Error);
+    
+}
+}
     }
 }

@@ -52,5 +52,24 @@ namespace Bakery.Service.Implement
         {
             _userRepository.UpdateCustomer(user);
         }
+        public User AuthenticateUser(string email, string password)
+        {
+          
+
+            User user = _userRepository.GetUserByEmailAndPassword(email, password);
+
+            if (user == null)
+            {
+                return null; 
+            }
+
+           
+            if (user.Status == false)
+            {
+                throw new UnauthorizedAccessException("Tài khoản của bạn đã bị khóa.");
+            }
+
+            return user;
+        }
     }
 }
