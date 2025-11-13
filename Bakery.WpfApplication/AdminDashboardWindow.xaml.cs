@@ -52,7 +52,7 @@ namespace Bakery.WpfApplication
         }
         private void btnBakery_Click(object sender, RoutedEventArgs e)
         {
-
+            ContentArea.Content = new View.BakeryManagement();
         }
 
         private void btnOrder_Click(object sender, RoutedEventArgs e)
