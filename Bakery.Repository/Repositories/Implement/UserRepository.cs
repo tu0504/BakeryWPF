@@ -75,10 +75,10 @@ namespace Bakery.Repository.Repositories.Implement
 
        
 
-        User IUserRepository.GetUserByEmailAndPassword(string email, string password)
+        public User? GetUserByEmailAndPassword(string email, string password)
         {
             return _context.Users.FirstOrDefault(u =>
-                u.Email.Equals(email, StringComparison.OrdinalIgnoreCase) &&
+                u.Email == email &&
                 u.Password == password);
         }
     }

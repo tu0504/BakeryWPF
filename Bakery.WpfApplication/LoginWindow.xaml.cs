@@ -1,18 +1,7 @@
 ﻿using Bakery.Repository.Models;
 using Bakery.Service;
 using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 using System.Windows;
-using System.Windows.Controls;
-using System.Windows.Data;
-using System.Windows.Documents;
-using System.Windows.Input;
-using System.Windows.Media;
-using System.Windows.Media.Imaging;
-using System.Windows.Shapes;
 
 namespace Bakery.WpfApplication
 {
@@ -22,25 +11,32 @@ namespace Bakery.WpfApplication
     public partial class LoginWindow : Window
     {
         private readonly UserService _userService;
+
         public LoginWindow()
         {
             InitializeComponent();
             _userService = new UserService();
         }
 
-        private void btnRegister_Click(object sender, RoutedEventArgs e)
+        private void btnLogin_Click(object sender, RoutedEventArgs e)
         {
+            try
+            {
+                string email = txtEmail.Text?.Trim() ?? string.Empty;
+                string password = txtPass.Password ?? string.Empty;
+
+                var user = _userService.GetUserByEmailAndPassword(email, password);
 
                 if (user != null)
                 {
                     // Kiểm tra vai trò
-                    if (user.Role.Equals("AD"))
+                    if (string.Equals(user.Role, "AD", StringComparison.OrdinalIgnoreCase))
                     {
                         this.Hide();
-                        AdminDashboardWindow admin = new AdminDashboardWindow(user.UserName);
+                        AdminDashboardWindow admin = new AdminDashboardWindow();
                         admin.Show();
                     }
-                    else if (user.Role.Equals("US"))
+                    else if (string.Equals(user.Role, "US", StringComparison.OrdinalIgnoreCase))
                     {
                         this.Hide();
                         ShopWindow shopWindow = new ShopWindow(user);
@@ -62,6 +58,12 @@ namespace Bakery.WpfApplication
             }
         }
 
+        private void btnRegister_Click(object sender, RoutedEventArgs e)
+        {
+            RegisterWindow register = new RegisterWindow();
+            register.ShowDialog();
+        }
+
         private void txtEmail_GotFocus(object sender, RoutedEventArgs e)
         {
             txtPlaceholder.Visibility = Visibility.Collapsed;
@@ -74,9 +76,18 @@ namespace Bakery.WpfApplication
                 txtPlaceholder.Visibility = Visibility.Visible;
             }
         }
+
         private void txtPass_GotFocus(object sender, RoutedEventArgs e)
         {
+            txtPlaceholderP.Visibility = Visibility.Collapsed;
+        }
 
+        private void txtPass_LostFocus(object sender, RoutedEventArgs e)
+        {
+            if (string.IsNullOrEmpty(txtPass.Password))
+            {
+                txtPlaceholderP.Visibility = Visibility.Visible;
+            }
         }
     }
 }

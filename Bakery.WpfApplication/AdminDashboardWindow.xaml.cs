@@ -1,5 +1,6 @@
 ﻿using Bakery.Service.Implement;
 using Bakery.Service.Interface;
+using Bakery.Service;
 using Bakery.WpfApplication.View;
 using System;
 using System.Collections.Generic;
@@ -22,9 +23,22 @@ namespace Bakery.WpfApplication
     /// </summary>
     public partial class AdminDashboardWindow : Window
     {
+    private readonly IUserService _userService;
+
         public AdminDashboardWindow()
         {
             InitializeComponent();
+            // initialize a default user service for admin views
+            _userService = new Bakery.Service.UserService();
+            // show orders view by default
+            try
+            {
+                ContentArea.Content = new View.OrderManagement();
+            }
+            catch
+            {
+                // ignore — UI will show nothing if content fails to load here
+            }
         }
 
         private void btnHome_OnClick(object sender, RoutedEventArgs e)
@@ -43,12 +57,15 @@ namespace Bakery.WpfApplication
 
         private void btnOrder_Click(object sender, RoutedEventArgs e)
         {
+            ContentArea.Content = new View.OrderManagement();
 
         }
 
         private void btnLogOut_Click(object sender, RoutedEventArgs e)
         {
-
+            LoginWindow l = new();
+            l.Show();
+            Close();
         }
     }
 }
