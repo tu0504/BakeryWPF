@@ -27,13 +27,14 @@ namespace Bakery.WpfApplication.Shop
         private readonly OrderService _orderService;
         private readonly CategoryService _categoryService;
         private readonly ShopWindow _shopWindow;
-        private Order _order;
+        private readonly Order _order;
         private int count;
-        private int cartItems;
 
         public BakeryList(Order order, int cartItems, ShopWindow shopWindow,
-                  OrderService orderService, ProductService productService,
-                  OrderDetailService orderDetailService, CategoryService categoryService)
+                          OrderService orderService,
+                          ProductService productService,
+                          OrderDetailService orderDetailService,
+                          CategoryService categoryService)
         {
             InitializeComponent();
 
@@ -46,116 +47,80 @@ namespace Bakery.WpfApplication.Shop
             _orderDetailService = orderDetailService;
             _categoryService = categoryService;
 
-            LoadProducts(); // gọi sau khi tất cả service đã sẵn sàng
+            // Gọi load sản phẩm **sau khi service đã gán**
+            LoadProducts();
         }
-
 
         private void LoadProducts()
         {
-            //MessageBox.Show("BakeryList.LoadProducts() called!");
-            List<Product> productList = _productService.GetAllProducts().ToList();
-            //MessageBox.Show($"Products loaded: {productList.Count}");
-            foreach (var product in productList)
+            if (_productService == null || _categoryService == null)
             {
-                Border productBorder = new Border
+                MessageBox.Show("Services not initialized!");
+                return;
+            }
+
+            var products = _productService.GetAllProducts().ToList();
+            DataWrapPanel.Children.Clear();
+
+            foreach (var product in products)
+            {
+                Border border = new Border
                 {
-                    BorderBrush = System.Windows.Media.Brushes.Gray,
-                    BorderThickness = new Thickness(2),
-                    CornerRadius = new CornerRadius(5),
-                    Margin = new Thickness(10),
                     Width = 180,
                     MinHeight = 250,
-                    Background = Brushes.White
+                    Margin = new Thickness(10),
+                    Background = Brushes.White,
+                    BorderBrush = Brushes.Gray,
+                    BorderThickness = new Thickness(1),
+                    CornerRadius = new CornerRadius(5)
                 };
 
-                StackPanel productPanel = new StackPanel { Margin = new Thickness(5) };
+                StackPanel panel = new StackPanel { Margin = new Thickness(5) };
 
                 if (!string.IsNullOrEmpty(product.ImageUrl))
                 {
                     try
                     {
-                        Image productImage = new Image
+                        panel.Children.Add(new Image
                         {
-                            Source = new BitmapImage(new System.Uri(product.ImageUrl, System.UriKind.RelativeOrAbsolute)),
+                            Source = new BitmapImage(new Uri(product.ImageUrl, UriKind.RelativeOrAbsolute)),
                             Width = 150,
-                            Height = 120,
-                            Margin = new Thickness(5)
-                        };
-                        productPanel.Children.Add(productImage);
+                            Height = 120
+                        });
                     }
                     catch { }
                 }
 
-                // Hiển thị thông tin sản phẩm
-                productPanel.Children.Add(new TextBlock { Text = $"ID: {product.ProductId}", Margin = new Thickness(5), FontWeight = FontWeights.Bold });
-                productPanel.Children.Add(new TextBlock { Text = $"Name: {product.ProductName}", Margin = new Thickness(5), FontWeight = FontWeights.Bold });
-                productPanel.Children.Add(new TextBlock { Text = $"Price: ${product.Price}", Margin = new Thickness(5) });
-                productPanel.Children.Add(new TextBlock { Text = $"Stock: {product.Stock}", Margin = new Thickness(5) });
+                panel.Children.Add(new TextBlock { Text = product.ProductName, FontWeight = FontWeights.Bold, Margin = new Thickness(5) });
+                panel.Children.Add(new TextBlock { Text = $"Price: ${product.Price}", Margin = new Thickness(5) });
 
-                string categoryName = _categoryService.GetCategoryById(product.CategoryId).CategoryName;
-                productPanel.Children.Add(new TextBlock { Text = $"Category: {categoryName}", Margin = new Thickness(5) });
-
-                productBorder.Child = productPanel;
-
-                // Thêm nút "Add to cart"
-                Button buttonCard = new Button
-                {
-                    Content = "Add to cart",
-                    Margin = new Thickness(0, 10, 0, 0),
-                    Height = 30,
-                    Width = 100
+                Button btn = new Button { Content = "Add to cart", Width = 100, Margin = new Thickness(0, 5, 0, 0),
+                    Background = Brushes.Orange,
+                    Foreground = Brushes.White,
+                    FontWeight = FontWeights.Bold,
+                    BorderBrush = Brushes.DarkOrange,
+                    Cursor = Cursors.Hand
                 };
-
-                buttonCard.Click += (s, e) =>
+                btn.Click += (s, e) =>
                 {
-                    OrderDetail orderDetail = new OrderDetail
+                    var detail = new OrderDetail
                     {
-                        ProductId = product.ProductId,
                         OrderId = _order.OrderId,
+                        ProductId = product.ProductId,
                         Quantity = 1,
                         UnitPrice = product.Price
                     };
-
-                    ++count;
-                    _shopWindow.AddOrderDetail(orderDetail);
+                    count++;
+                    _shopWindow.AddOrderDetail(detail);
                     _shopWindow.UpdateCartItems(count);
-
-                    MessageBox.Show("Added to cart successfully!", "Success", MessageBoxButton.OK, MessageBoxImage.Information);
+                    MessageBox.Show("Added to cart!");
                 };
 
-                productPanel.Children.Add(buttonCard);
-
-                // Thêm nút "Buy Now" (nếu bạn muốn xử lý mua ngay)
-                //Button buttonBuy = new Button
-                //{
-                //    Content = "Buy Now",
-                //    Margin = new Thickness(0, 10, 0, 0),
-                //    Height = 30,
-                //    Width = 100
-                //};
-
-                //buttonBuy.Click += (s, e) =>
-                //{
-                //    // Logic mua ngay: thêm vào Order, rồi chuyển đến trang thanh toán
-                //    OrderDetail orderDetail = new OrderDetail
-                //    {
-                //        ProductId = product.ProductId,
-                //        OrderId = _order.OrderId,
-                //        Quantity = 1,
-                //        UnitPrice = product.Price
-                //    };
-
-                //    _shopWindow.AddOrderDetail(orderDetail);
-                //    _order.TotalAmount += product.Price;
-                //    orderService.UpdateOrder(_order);
-
-                //    MessageBox.Show("Purchase successful!", "Order", MessageBoxButton.OK, MessageBoxImage.Information);
-                //};
-
-                //productPanel.Children.Add(buttonBuy);
-                productBorder.Child = productPanel;
-                DataWrapPanel.Children.Add(productBorder);
+                panel.Children.Add(btn);
+                border.Child = panel;
+                DataWrapPanel.Children.Add(border);
             }
         }
     }
+
 }

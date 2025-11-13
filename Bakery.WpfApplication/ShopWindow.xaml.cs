@@ -89,11 +89,20 @@ namespace Bakery.WpfApplication
                 TotalAmount = 0,
                 Status = "Pending"
             };
+
             int cartItems = int.Parse(CartItems.Text);
 
-            ContentArea.Content = new BakeryList(order, cartItems, this,
-                _orderService, _productService, _orderDetailService, _categoryService);
+            ContentArea.Content = new BakeryList(
+                order,
+                cartItems,
+                this,
+                _orderService,
+                _productService,
+                _orderDetailService,
+                _categoryService
+            );
         }
+
 
         public void AddOrderDetail(OrderDetail orderDetail)
         {
