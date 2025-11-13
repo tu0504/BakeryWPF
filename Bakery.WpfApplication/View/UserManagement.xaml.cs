@@ -91,7 +91,7 @@ namespace Bakery.WpfApplication.View
                 user.Role = txtRole.Text;
                 user.Address = txtAddress.Text;
                 user.Phone = txtPhone.Text;
-                user.Status = rbStatusActive.IsChecked == true ? true : true;
+                user.Status = rbStatusActive.IsChecked == true ? true : false;
 
                 _userService.SaveUser(user);
                 MessageBox.Show("Create Successfully", "Successfully", MessageBoxButton.OK, MessageBoxImage.Information);
@@ -101,7 +101,35 @@ namespace Bakery.WpfApplication.View
         }
         private void btnEdit_Click(object sender, RoutedEventArgs e)
         {
-            
+            Button button = sender as Button;
+            if (button == null) return;
+
+            User selectedUser = button.DataContext as User;
+
+            if (selectedUser != null)
+            {
+
+                FillElement(selectedUser);
+                dgData.SelectedItem = selectedUser;
+                txtUserName.Focus();
+
+            }
+        }
+        private void FillElement (User u)
+        {
+            if (u == null) return;
+            txtUserId.Text = u.UserId.ToString();
+            txtUserName.Text = u.UserName.ToString();
+            txtFullName.Text = u.FullName.ToString();
+            txtEmail.Text = u.Email.ToString();
+            txtPassword.Text = u.Password.ToString();
+            txtRole.Text = u.Role.ToString();
+            txtAddress.Text = u.Address.ToString();
+            txtPhone.Text = u.Phone.ToString();
+            rbStatusActive.IsChecked = u.Status;   
+            rbStatusInactive.IsChecked = !u.Status;
+            HideAllPlaceholders();
+
         }
         private void btnUpdateUser(object sender, RoutedEventArgs e)
         {
@@ -154,21 +182,21 @@ namespace Bakery.WpfApplication.View
 
                 int userId = Int32.Parse(txtUserId.Text);
 
-
-                User updatedUser = new User
+                User x = new();
                 {
-                    UserId = userId,
-                    UserName = txtUserName.Text,
-                    FullName = txtFullName.Text,
-                    Password = txtPassword.Text,
-                    Role = txtRole.Text,
-                    Address = txtAddress.Text,
-                    Phone = txtPhone.Text,
-                    Status = rbStatusActive.IsChecked == true ? true : false
+                    x.UserId = Int32.Parse(txtUserId.Text);
+                    x.UserName = txtUserName.Text;
+                    x.FullName = txtFullName.Text;
+                    x.Password = txtPassword.Text;
+                    x.Role = txtRole.Text;
+                    x.Email = txtEmail.Text;
+                    x.Address = txtAddress.Text;
+                    x.Phone = txtPhone.Text;
+                    x.Status = rbStatusActive.IsChecked == true ? true : false;
                 };
 
-                // 4. Gọi Service để cập nhật
-                _userService.UpdateCustomer(updatedUser);
+                
+                _userService.UpdateCustomer(x);
 
                 MessageBox.Show($"Update user ID {userId} successfully!", "Success", MessageBoxButton.OK, MessageBoxImage.Information);
             }
@@ -182,7 +210,7 @@ namespace Bakery.WpfApplication.View
             }
             finally
             {
-                // 5. Tải lại danh sách (Luôn chạy)
+
                 LoadUserList();
             }
         }
@@ -209,47 +237,72 @@ namespace Bakery.WpfApplication.View
 
         private void btnSearch_Click(object sender, RoutedEventArgs e)
         {
+           
             string fullName = txtSearch.Text.Trim();
-            if (string.IsNullOrEmpty(fullName))
+
+            
+            if (string.IsNullOrWhiteSpace(fullName) || fullName.Equals("Search by name or email", StringComparison.OrdinalIgnoreCase))
             {
+                
                 LoadUserList();
             }
             else
             {
-                List<User> customers = _userService.SearchByName(fullName);
-                if (customers.Any() )
+                
+                try
                 {
-                    dgData.ItemsSource = customers;
+                    List<User> customers = _userService.SearchByNameOrEmail(fullName);
+
+                    if (customers != null && customers.Any())
+                    {
+                        dgData.ItemsSource = customers;
+                    }
+                    else
+                    {
+                        dgData.ItemsSource = null; 
+                        MessageBox.Show("No customers found!", "Notification", MessageBoxButton.OK, MessageBoxImage.Information);
+                    }
                 }
-                else
+                catch (Exception ex)
                 {
-                    MessageBox.Show("No customers found!", "Notification", MessageBoxButton.OK, MessageBoxImage.Information);
+                    MessageBox.Show($"Lỗi tìm kiếm: {ex.Message}", "Error", MessageBoxButton.OK, MessageBoxImage.Error);
                 }
             }
-
         }
-
         private void txtSearch_GotFocus(object sender, RoutedEventArgs e)
         {
-            if (txtSearch.Text == "Search")
+            if (txtSearch.Text == "Search by name or email")
                 txtSearch.Text = string.Empty;
+                txtSearch.Foreground = Brushes.Black;
         }
 
         private void txtSearch_LostFocus(object sender, RoutedEventArgs e)
         {
             if (string.IsNullOrWhiteSpace(txtSearch.Text))
-                txtSearch.Text = "Search";
+                txtSearch.Text = "Search by name or email";
+                txtSearch.Foreground = Brushes.Gray;
         }
         private void ResetInput()
         {
-            txtUserId.Text = " ";
-            txtUserName.Text = " ";
-            txtFullName.Text = "";
-            txtPassword.Text = "";
-            txtAddress.Text = "";
-            txtPhone.Text = "";
+            txtUserId.Text = string.Empty;
+            txtUserName.Text = string.Empty;
+            txtFullName.Text = string.Empty;
+            txtPassword.Text = string.Empty;
+            txtEmail.Text = string.Empty;
+            txtRole.Text = string.Empty;
+            txtAddress.Text = string.Empty;
+            txtPhone.Text = string.Empty;
             rbStatusActive.IsChecked = false;
             rbStatusInactive.IsChecked = false;
+
+            txtInput_LostFocus(txtUserName, null);
+            txtInput_LostFocus(txtFullName, null);
+            txtInput_LostFocus(txtEmail, null);
+            txtInput_LostFocus(txtPassword, null);
+            txtInput_LostFocus(txtRole, null);
+            txtInput_LostFocus(txtAddress, null);
+            txtInput_LostFocus(txtPhone, null);
+
         }
 
         private void UserControl_Loaded(object sender, RoutedEventArgs e)
@@ -272,7 +325,94 @@ namespace Bakery.WpfApplication.View
             LoadUserList();
         }
 
+        private void txtInput_GotFocus(object sender, RoutedEventArgs e)
+        {
+            TextBox textBox = sender as TextBox;
+            if (textBox == null) return;
 
+           
+            Grid parentGrid = VisualTreeHelper.GetParent(textBox) as Grid;
+
+            if (parentGrid != null)
+            {
+              
+                TextBlock placeholderText = parentGrid.Children.OfType<TextBlock>().FirstOrDefault();
+
+                if (placeholderText != null)
+                {
+                  
+                    placeholderText.Visibility = Visibility.Collapsed;
+                }
+            }
+        }
+
+        private void txtInput_LostFocus(object sender, RoutedEventArgs e)
+        {
+            TextBox textBox = sender as TextBox;
+            if (textBox == null) return;
+
+            
+            if (string.IsNullOrWhiteSpace(textBox.Text))
+            {
+                
+                Grid parentGrid = VisualTreeHelper.GetParent(textBox) as Grid;
+
+                if (parentGrid != null)
+                {
+                   
+                    TextBlock placeholderText = parentGrid.Children.OfType<TextBlock>().FirstOrDefault();
+
+                    if (placeholderText != null)
+                    {
+                        
+                        placeholderText.Visibility = Visibility.Visible;
+                    }
+                }
+            }
+            
+        }
+
+        private void HideAllPlaceholders()
+        {
+            List<TextBox> textInputs = new List<TextBox> {
+                txtUserId, txtUserName, txtFullName, txtEmail, txtPassword,
+                txtRole, txtAddress, txtPhone
+            };
+
+            foreach (var textBox in textInputs)
+            {
+                Grid parentGrid = VisualTreeHelper.GetParent(textBox) as Grid;
+
+                if (parentGrid != null)
+                {
+                    // Tìm TextBlock (Placeholder) bên trong Grid
+                    TextBlock placeholderText = parentGrid.Children.OfType<TextBlock>().FirstOrDefault();
+
+                    if (placeholderText != null)
+                    {
+                        // Ẩn TextBlock
+                        placeholderText.Visibility = Visibility.Collapsed;
+                    }
+                }
+            }
+        }
+        private void dgData_SelectionChanged(object sender, SelectionChangedEventArgs e)
+        {
+            
+            User selectedUser = dgData.SelectedItem as User;
+
+            if (selectedUser != null)
+            {
+
+                FillElement(selectedUser);
+            }
+            
+            else
+            {
+                
+                ResetInput();
+            }
+        }
 
 
     }
