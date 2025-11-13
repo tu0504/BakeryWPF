@@ -1,4 +1,5 @@
 ﻿using Bakery.Repository.Models;
+using Bakery.Repository.Context;
 using Microsoft.EntityFrameworkCore;
 using Repositories.Base;
 using System;
@@ -20,6 +21,8 @@ namespace Bakery.Repository.Repositories
 
     public class OrderDetailRepo : GenericRepository<OrderDetail>, IOrderDetailRepo
     {
+        public OrderDetailRepo() : base() { }
+        public OrderDetailRepo(BakeryContext context) : base(context) { }
         // mark as new to indicate intentional hiding of base generic methods
         public new List<OrderDetail> GetAll()
         {
