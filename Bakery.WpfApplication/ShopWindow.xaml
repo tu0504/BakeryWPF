@@ -69,16 +69,16 @@
                 Margin="5,20,5,0" 
                 Content="Bakery List" 
                 Foreground="Black" 
-                />
+                Click="bakeryList_Click"/>
 
             <Button x:Name="logOut" 
                 Height="40" 
                 Margin="5,20,5,0" 
                 Content="Log Out" 
                 Background="Orange"
-                />
+                Click="logOut_Click"/>
         </StackPanel>
 
-        <ContentControl x:Name="ContentArea" Grid.Row="1" Margin="104,10,20,3" VerticalAlignment="Stretch" HorizontalAlignment="Stretch"/>
+        <ContentControl x:Name="ContentArea" Grid.Row="1" Margin="104,0,20,3" VerticalAlignment="Stretch" HorizontalAlignment="Stretch"/>
     </Grid>
 </Window>

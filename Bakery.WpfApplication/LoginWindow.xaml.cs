@@ -5,18 +5,7 @@ using Bakery.Service;
 using Bakery.Service.Implement;
 using Bakery.Service.Interface;
 using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 using System.Windows;
-using System.Windows.Controls;
-using System.Windows.Data;
-using System.Windows.Documents;
-using System.Windows.Input;
-using System.Windows.Media;
-using System.Windows.Media.Imaging;
-using System.Windows.Shapes;
 
 namespace Bakery.WpfApplication
 {
@@ -25,10 +14,13 @@ namespace Bakery.WpfApplication
     /// </summary>
     public partial class LoginWindow : Window
     {
-        private IUserService? _userService;
+
+        private readonly IUserService _userService;
+
         public LoginWindow()
         {
             InitializeComponent();
+            // keep lightweight initialization; if this fails you will get a clear message instead of NRE later
             try
             {
                 IUserRepository userRepository = new UserRepository();
@@ -36,68 +28,88 @@ namespace Bakery.WpfApplication
             }
             catch (Exception ex)
             {
+                // log or show a friendly error so developer can see what failed during construction
                 MessageBox.Show($"Failed to create default services: {ex.Message}", "Initialization error", MessageBoxButton.OK, MessageBoxImage.Error);
                 _userService = null;
             }
         }
+
         public LoginWindow(IUserService userService)
         {
             InitializeComponent();
             _userService = userService;
         }
 
-        private void btnRegister_Click(object sender, RoutedEventArgs e)
-        {
-            RegisterWindow regis = new();
-            regis.ShowDialog();
-
-        }
-
         private void btnLogin_Click(object sender, RoutedEventArgs e)
         {
-
-            string email = txtEmail.Text.Trim();
-            string password = txtPass.Password;
-            if (string.IsNullOrWhiteSpace(email) || string.IsNullOrWhiteSpace(password))
-            {
-                MessageBox.Show("Please enter full Email and Password.", "Missing information", MessageBoxButton.OK, MessageBoxImage.Warning);
-                return;
-            }
             try
             {
+                string email = txtEmail.Text?.Trim() ?? string.Empty;
+                string password = txtPass.Password ?? string.Empty;
 
-            User? authenticatedUser = _userService.AuthenticateUser(email, password);
+                var user = _userService.GetUserByEmailAndPassword(email, password);
 
-            if (authenticatedUser != null)
-            {
-
-                if (authenticatedUser.Status == false)
+                if (user != null)
                 {
-                    MessageBox.Show("Your account has been locked. Please contact your administrator.", "Access denied", MessageBoxButton.OK, MessageBoxImage.Warning);
-                    return;
+                    // Kiểm tra vai trò
+                    if (string.Equals(user.Role, "AD", StringComparison.OrdinalIgnoreCase))
+                    {
+                        this.Hide();
+                        AdminDashboardWindow admin = new AdminDashboardWindow();
+                        admin.Show();
+                    }
+                    else if (string.Equals(user.Role, "US", StringComparison.OrdinalIgnoreCase))
+                    {
+                        this.Hide();
+                        ShopWindow shopWindow = new ShopWindow(user);
+                        shopWindow.Show();
+                    }
+                    else
+                    {
+                        MessageBox.Show("User role not recognized!", "Error", MessageBoxButton.OK, MessageBoxImage.Error);
+                    }
                 }
-                if (authenticatedUser.Role == "AD")
+                else
                 {
-                    AdminDashboardWindow admin = new();
-                    admin.Show();
-                    this.Hide();
+                    MessageBox.Show("Email or password is incorrect!", "Login Failed", MessageBoxButton.OK, MessageBoxImage.Warning);
                 }
-                
-                MessageBox.Show($"Login successful! Welcome, {authenticatedUser.FullName}.", "Success", MessageBoxButton.OK, MessageBoxImage.Information);
-
-                
             }
-            else
+            catch (Exception ex)
             {
-                // Lỗi xác thực (User không tồn tại hoặc mật khẩu sai)
-                MessageBox.Show("Email hoặc mật khẩu không chính xác.", "Lỗi đăng nhập", MessageBoxButton.OK, MessageBoxImage.Error);
+                MessageBox.Show($"Error: {ex.Message}", "Login Error", MessageBoxButton.OK, MessageBoxImage.Error);
             }
         }
-    catch (Exception ex)
-    {
-        MessageBox.Show($"Lỗi hệ thống: {ex.Message}", "Lỗi", MessageBoxButton.OK, MessageBoxImage.Error);
-    
-}
-}
+
+        private void btnRegister_Click(object sender, RoutedEventArgs e)
+        {
+            RegisterWindow register = new RegisterWindow();
+            register.ShowDialog();
+        }
+
+        private void txtEmail_GotFocus(object sender, RoutedEventArgs e)
+        {
+            txtPlaceholder.Visibility = Visibility.Collapsed;
+        }
+
+        private void txtEmail_LostFocus(object sender, RoutedEventArgs e)
+        {
+            if (string.IsNullOrEmpty(txtEmail.Text))
+            {
+                txtPlaceholder.Visibility = Visibility.Visible;
+            }
+        }
+
+        private void txtPass_GotFocus(object sender, RoutedEventArgs e)
+        {
+            txtPlaceholderP.Visibility = Visibility.Collapsed;
+        }
+
+        private void txtPass_LostFocus(object sender, RoutedEventArgs e)
+        {
+            if (string.IsNullOrEmpty(txtPass.Password))
+            {
+                txtPlaceholderP.Visibility = Visibility.Visible;
+            }
+        }
     }
 }

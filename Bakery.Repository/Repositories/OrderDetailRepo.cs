@@ -12,7 +12,7 @@ namespace Bakery.Repository.Repositories
     public interface IOrderDetailRepo
     {
         List<OrderDetail> GetAll();
-        OrderDetail GetById(int id);
+        OrderDetail? GetById(int id);
         void Create(OrderDetail entity);
         void Update(OrderDetail entity);
         bool Remove(OrderDetail entity);
@@ -20,31 +20,34 @@ namespace Bakery.Repository.Repositories
 
     public class OrderDetailRepo : GenericRepository<OrderDetail>, IOrderDetailRepo
     {
-        public List<OrderDetail> GetAll()
+        // mark as new to indicate intentional hiding of base generic methods
+        public new List<OrderDetail> GetAll()
         {
             return _context.OrderDetails
                 .Include(o => o.Order)
                 .Include(p => p.Product)
                 .ToList();
         }
-        public OrderDetail? GetById(int id)
+        public new OrderDetail? GetById(int id)
         {
             return _context.OrderDetails
                 .Include(o => o.Order)
                 .Include(p => p.Product)
                 .FirstOrDefault(od => od.OrderDetailId == id);
         }
-        public void Create(OrderDetail entity)
+        public new void Create(OrderDetail entity)
         {
-            Create(entity);
+            base.Create(entity);
         }
-        public void Update(OrderDetail entity)
+
+        public new void Update(OrderDetail entity)
         {
-            Update(entity);
+            base.Update(entity);
         }
-        public bool Remove(OrderDetail entity)
+
+        public new bool Remove(OrderDetail entity)
         {
-            return Remove(entity);
+            return base.Remove(entity);
         }
     }
 }
