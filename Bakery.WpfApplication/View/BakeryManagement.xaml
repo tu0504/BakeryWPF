@@ -79,7 +79,7 @@
 
                 </Button.Triggers>
             </Button>
-            <Button x:Name="UpdateButton" Content="Update bakery" Width="155" Margin="5" Click="UpdateButton_Click" >
+            <Button x:Name="UpdateButton" Content="Update bakery" Width="155" Margin="5" IsEnabled="False" Click="UpdateButton_Click" >
                 <Button.Background>
                     <SolidColorBrush Color="#FF1B7140" />
                 </Button.Background>
@@ -112,7 +112,7 @@
                     </EventTrigger>
                 </Button.Triggers>
             </Button>
-            <Button x:Name="DeleteButton" Content="Delete bakery" Width="155" Margin="5" Padding="5" Click="DeleteButton_Click" >
+            <Button x:Name="DeleteButton" Content="Delete bakery" Width="155" Margin="5" Padding="5" IsEnabled="False" Click="DeleteButton_Click" >
                 <Button.Background>
                     <SolidColorBrush Color="#FFA2AA3D" />
                 </Button.Background>
