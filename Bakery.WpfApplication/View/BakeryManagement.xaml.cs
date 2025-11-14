@@ -57,11 +57,6 @@ namespace Bakery.WpfApplication.View
         public void FillDataGrid(List<Product> data)
         {
             dgData.ItemsSource = null;
-            foreach (var product in data)
-            {
-                string packUri = $"pack://application:,,,/{product.ImageUrl}";
-                product.ImageUrl = packUri; // property trong Product
-            }
             dgData.ItemsSource = data;
         }
 
@@ -123,7 +118,7 @@ namespace Bakery.WpfApplication.View
                 List <Product> products = _productService.GetProductsByName(name);
                 if (products.Any())
                 {
-                    dgData.ItemsSource = products;
+                    FillDataGrid(products);
                 }
                 else
                 {
