@@ -1,6 +1,6 @@
-﻿using Bakery.Service.Implement;
+﻿using Bakery.Service;
+using Bakery.Service.Implement;
 using Bakery.Service.Interface;
-using Bakery.Service;
 using Bakery.WpfApplication.View;
 using System;
 using System.Collections.Generic;
@@ -13,6 +13,7 @@ using System.Windows.Data;
 using System.Windows.Documents;
 using System.Windows.Input;
 using System.Windows.Media;
+using System.Windows.Media.Animation;
 using System.Windows.Media.Imaging;
 using System.Windows.Shapes;
 
@@ -24,25 +25,43 @@ namespace Bakery.WpfApplication
     public partial class AdminDashboardWindow : Window
     {
         private readonly IUserService _userService;
+        private bool _isMenuOpen = false;
 
         public AdminDashboardWindow()
         {
             InitializeComponent();
-            // initialize a default user service for admin views
+          
             _userService = new Bakery.Service.UserService();
-            // show orders view by default
-            try
-            {
-                ContentArea.Content = new View.OrderManagement();
-            }
-            catch
-            {
-                // ignore — UI will show nothing if content fails to load here
-            }
+        
         }
 
         private void btnHome_OnClick(object sender, RoutedEventArgs e)
         {
+
+
+            double expandedHeight = SubMenu.ActualHeight;   // chiều cao thật của submenu
+            double collapsedHeight = 0;
+
+            DoubleAnimation animation = new DoubleAnimation
+            {
+                Duration = TimeSpan.FromMilliseconds(250),
+                AccelerationRatio = 0.3,
+                DecelerationRatio = 0.3
+            };
+
+            if (_isMenuOpen)
+            {
+                animation.From = expandedHeight;
+                animation.To = collapsedHeight;
+            }
+            else
+            {
+                animation.From = collapsedHeight;
+                animation.To = expandedHeight;
+            }
+
+            SubMenuContainer.BeginAnimation(HeightProperty, animation);
+            _isMenuOpen = !_isMenuOpen;
 
         }
 
