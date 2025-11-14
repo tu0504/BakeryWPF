@@ -1,10 +1,11 @@
-﻿using Bakery.Repository.Models;
+using Bakery.Repository.Models;
 using Bakery.Service;
 using System;
 using System.Collections.Generic;
 using System.Text.RegularExpressions;
 using System.Windows;
 using System.Windows.Controls;
+
 
 namespace Bakery.WpfApplication
 {
@@ -94,12 +95,14 @@ namespace Bakery.WpfApplication
 
                 _userService.SaveUser(user);
                 MessageBox.Show("Register successful.", "Success", MessageBoxButton.OK, MessageBoxImage.Information);
-                this.Close();
+                Close();
             }
             catch (Exception ex)
             {
                 MessageBox.Show($"Registration failed: {ex.Message}", "Error", MessageBoxButton.OK, MessageBoxImage.Error);
             }
         }
+
     }
+
 }

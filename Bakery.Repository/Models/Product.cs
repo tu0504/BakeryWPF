@@ -33,6 +33,7 @@ public partial class Product
             return $"pack://application:,,,/{ImageUrl}";
         }
     }
+
     public virtual ICollection<OrderDetail> OrderDetails { get; set; } = new List<OrderDetail>();
 
 }

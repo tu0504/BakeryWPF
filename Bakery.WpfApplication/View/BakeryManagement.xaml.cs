@@ -113,7 +113,7 @@ namespace Bakery.WpfApplication.View
                 List <Product> products = _productService.GetProductsByName(name);
                 if (products.Any())
                 {
-                    dgData.ItemsSource = products;
+                    FillDataGrid(products);
                 }
                 else
                 {
@@ -282,6 +282,9 @@ namespace Bakery.WpfApplication.View
                 Stock.Focus();
                 return false;
             }
+
+
+
             if (!int.TryParse(Stock.Text, out int stockValue))
             {
                 MessageBox.Show("Invalid stock format. Please enter a valid integer.", "Warning", MessageBoxButton.OK, MessageBoxImage.Warning);
