@@ -77,25 +77,34 @@ namespace Bakery.WpfApplication
 
         private void bakeryList_Click(object sender, RoutedEventArgs e)
         {
-            _currentOrder = new Order
+            try
             {
-                UserId = _currentUser.UserId,
-                OrderDate = DateTime.Now,
-                TotalAmount = 0,
-                Status = "Pending"
-            };
+                _currentOrder = new Order
+                {
+                    UserId = _currentUser.UserId,
+                    OrderDate = DateTime.Now,
+                    TotalAmount = 0,
+                    Status = "Pending"
+                };
 
-            int cartItems = int.Parse(CartItems.Text);
+                int cartItems = int.Parse(CartItems.Text);
 
-            ContentArea.Content = new BakeryList(
-                _currentOrder,
-                cartItems,
-                this,
-                _orderService,
-                _productService,
-                _orderDetailService,
-                _categoryService
-            );
+                ContentArea.Content = new BakeryList(
+                    _currentOrder,
+                    cartItems,
+                    this,
+                    _orderService,
+                    _productService,
+                    _orderDetailService,
+                    _categoryService
+                );
+
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show($"An error occurred while loading the bakery list: {ex.Message}",
+                    "Error", MessageBoxButton.OK, MessageBoxImage.Error);
+            }
         }
 
 

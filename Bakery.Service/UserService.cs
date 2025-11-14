@@ -40,9 +40,6 @@ namespace Bakery.Service
             throw new NotImplementedException();
         }
 
-        public List<User> SearchByNameOrEmail(string searchTerm)
-        {
-            throw new NotImplementedException();
-        }
+        public List<User> SearchByNameOrEmail(string searchTerm) => _impl.SearchByNameOrEmail(searchTerm);
     }
 }

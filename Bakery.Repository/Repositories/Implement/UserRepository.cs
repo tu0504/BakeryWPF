@@ -89,10 +89,7 @@ namespace Bakery.Repository.Repositories.Implement
             string lowerEmail = email.ToLower();
 
             return _context.Users.FirstOrDefault(u =>
-                // 2. ✅ SỬA LỖI: Chuyển đổi cột DB sang chữ thường trước khi so sánh
                 u.Email.ToLower() == lowerEmail &&
-
-                // 3. Giữ nguyên kiểm tra mật khẩu (vì bạn không dùng hash)
                 u.Password == password);
         }
     }

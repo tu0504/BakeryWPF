@@ -1,5 +1,10 @@
 ﻿using Bakery.Repository.Models;
 using Bakery.Service;
+using System;
+using System.Collections.Generic;
+using System.Linq;
+using System.Text;
+using System.Threading.Tasks;
 using System.Windows;
 using System.Windows.Controls;
 
@@ -34,7 +39,7 @@ namespace Bakery.WpfApplication.Shop
             dgData.ItemsSource = _currentOrderDetails;
 
             decimal totalPrice = _currentOrderDetails.Sum(od => od.Quantity * od.UnitPrice);
-            txtTotalPrice.Text = totalPrice.ToString("C");
+            txtTotalPrice.Text = totalPrice.ToString("C", new System.Globalization.CultureInfo("vi-VN"));
         }
 
         private void dgData_SelectionChanged(object sender, SelectionChangedEventArgs e)
@@ -140,7 +145,7 @@ namespace Bakery.WpfApplication.Shop
                     UserId = _currentOrder.UserId,
                     OrderDate = DateTime.Now,
                     TotalAmount = totalAmount,
-                    Status = "Completed"
+                    Status = "Pending"
                 };
 
                 // Add all order details to the order before saving

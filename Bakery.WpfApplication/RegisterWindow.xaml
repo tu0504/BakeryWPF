@@ -5,7 +5,8 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:Bakery.WpfApplication"
         mc:Ignorable="d"
-        Title="RegisterWindow" Height="550" Width="800">
+        Title="RegisterWindow" Height="550" Width="800"
+        WindowStartupLocation="CenterScreen">
     <Grid>
         <Border CornerRadius="10" BorderThickness="2">
             <Border.Background>

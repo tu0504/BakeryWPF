@@ -57,11 +57,6 @@ namespace Bakery.WpfApplication.View
         public void FillDataGrid(List<Product> data)
         {
             dgData.ItemsSource = null;
-            foreach (var product in data)
-            {
-                string packUri = $"pack://application:,,,/{product.ImageUrl}";
-                product.ImageUrl = packUri; // property trong Product
-            }
             dgData.ItemsSource = data;
         }
 
@@ -123,7 +118,7 @@ namespace Bakery.WpfApplication.View
                 List <Product> products = _productService.GetProductsByName(name);
                 if (products.Any())
                 {
-                    dgData.ItemsSource = products;
+                    FillDataGrid(products);
                 }
                 else
                 {
@@ -271,23 +266,40 @@ namespace Bakery.WpfApplication.View
                 Price.Focus();
                 return false;
             }
-            if (!decimal.TryParse(Price.Text, out _))
+            if (!decimal.TryParse(Price.Text, out decimal priceValue))
             {
                 MessageBox.Show("Invalid price format. Please enter a valid number.", "Warning", MessageBoxButton.OK, MessageBoxImage.Warning);
                 Price.Focus();
                 return false;
             }
 
-            
+            if (priceValue <= 0)
+            {
+                MessageBox.Show("Price must be greater than 0!", "Warning", MessageBoxButton.OK, MessageBoxImage.Warning);
+                Price.Focus();
+                return false;
+            }
+
+
             if (string.IsNullOrWhiteSpace(Stock.Text))
             {
                 MessageBox.Show("Stock is required!", "Warning", MessageBoxButton.OK, MessageBoxImage.Warning);
                 Stock.Focus();
                 return false;
             }
-            if (!int.TryParse(Stock.Text, out _))
+
+
+
+            if (!int.TryParse(Stock.Text, out int stockValue))
             {
                 MessageBox.Show("Invalid stock format. Please enter a valid integer.", "Warning", MessageBoxButton.OK, MessageBoxImage.Warning);
+                Stock.Focus();
+                return false;
+            }
+
+            if (stockValue < 0)
+            {
+                MessageBox.Show("Stock must be 0 or greater!", "Warning", MessageBoxButton.OK, MessageBoxImage.Warning);
                 Stock.Focus();
                 return false;
             }
