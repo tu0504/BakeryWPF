@@ -95,7 +95,7 @@ namespace Bakery.WpfApplication
 
                 _userService.SaveUser(user);
                 MessageBox.Show("Register successful.", "Success", MessageBoxButton.OK, MessageBoxImage.Information);
-                this.Close();
+                Close();
             }
             catch (Exception ex)
             {

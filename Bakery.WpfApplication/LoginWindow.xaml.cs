@@ -84,6 +84,7 @@ namespace Bakery.WpfApplication
         {
             RegisterWindow register = new RegisterWindow();
             register.ShowDialog();
+            Hide();
         }
 
 

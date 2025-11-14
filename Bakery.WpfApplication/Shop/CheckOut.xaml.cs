@@ -34,7 +34,7 @@ namespace Bakery.WpfApplication.Shop
             dgData.ItemsSource = _currentOrderDetails;
 
             decimal totalPrice = _currentOrderDetails.Sum(od => od.Quantity * od.UnitPrice);
-            txtTotalPrice.Text = totalPrice.ToString("C");
+            txtTotalPrice.Text = totalPrice.ToString("đ");
         }
 
         private void dgData_SelectionChanged(object sender, SelectionChangedEventArgs e)
@@ -140,7 +140,7 @@ namespace Bakery.WpfApplication.Shop
                     UserId = _currentOrder.UserId,
                     OrderDate = DateTime.Now,
                     TotalAmount = totalAmount,
-                    Status = "Completed"
+                    Status = "Pending"
                 };
 
                 // Add all order details to the order before saving

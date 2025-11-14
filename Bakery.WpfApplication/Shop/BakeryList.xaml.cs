@@ -77,26 +77,28 @@ namespace Bakery.WpfApplication.Shop
                 };
 
                 StackPanel panel = new StackPanel { Margin = new Thickness(5) };
-
-                string imagePath = System.IO.Path.Combine(AppDomain.CurrentDomain.BaseDirectory, product.ImageUrl.Replace("/", "\\"));
-                if (File.Exists(imagePath))
+                if (!string.IsNullOrEmpty(product.ImageUrl))
                 {
-                    panel.Children.Add(new Image
+                    try
                     {
-                        Source = new BitmapImage(new Uri(imagePath, UriKind.Absolute)),
-                        Width = 150,
-                        Height = 120,
-                        Stretch = Stretch.UniformToFill
-                    });
-                }
-                else
-                {
-                    panel.Children.Add(new TextBlock { Text = "No image", Foreground = Brushes.Gray });
+
+                        panel.Children.Add(new Image
+                        {
+                            Source = new BitmapImage(new Uri($"pack://application:,,,/{product.ImageUrl}")),
+                            Width = 150,
+                            Height = 120
+                        });
+                    }
+                    catch (Exception ex)
+                    {
+                        throw new Exception("Error loading image", ex);
+                    }
+
                 }
 
-
+                var productPrice = (int)product.Price;
                 panel.Children.Add(new TextBlock { Text = product.ProductName, FontWeight = FontWeights.Bold, Margin = new Thickness(5) });
-                panel.Children.Add(new TextBlock { Text = $"Price: {product.Price}đ", Margin = new Thickness(5) });
+                panel.Children.Add(new TextBlock { Text = $"Price: {productPrice}đ", Margin = new Thickness(5) });
 
                 Button btn = new Button { Content = "Add to cart", Width = 100, Margin = new Thickness(0, 5, 0, 0),
                     Background = Brushes.Orange,
