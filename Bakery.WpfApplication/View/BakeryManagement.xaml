@@ -29,7 +29,7 @@
                 <DataGridTemplateColumn Header="Image" Width="100">
                     <DataGridTemplateColumn.CellTemplate>
                         <DataTemplate>
-                            <Image  Source="{Binding ImageUrl}" Width="100" Height="100" Stretch="Uniform" />
+                            <Image  Source="{Binding FullImageUrl}" Width="100" Height="100" Stretch="Uniform" />
                         </DataTemplate>
                     </DataGridTemplateColumn.CellTemplate>
                 </DataGridTemplateColumn>
