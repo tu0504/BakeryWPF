@@ -21,7 +21,7 @@
                   AutoGenerateColumns="False" IsReadOnly="True"
                   SelectionChanged="dgData_SelectionChanged"
                     PreviewMouseLeftButtonDown="dgData_PreviewMouseLeftButtonDown"
-                  CanUserAddRows="False" Grid.RowSpan="2" Margin="27,0,-27,0" >
+                  CanUserAddRows="False" Grid.RowSpan="2" Margin="27,0,10,0" >
             <DataGrid.Columns>
                 <DataGridTextColumn Header="ID" Binding="{Binding ProductId}" Width="50" />
                 <DataGridTextColumn Header="Name" Binding="{Binding ProductName}" Width="100" />
