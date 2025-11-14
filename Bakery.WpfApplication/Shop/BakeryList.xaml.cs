@@ -62,6 +62,14 @@ namespace Bakery.WpfApplication.Shop
 
             var products = _productService.GetAllProducts().ToList();
             DataWrapPanel.Children.Clear();
+            if (_productService == null || _categoryService == null)
+            {
+                MessageBox.Show("Services not initialized!");
+                return;
+            }
+
+            var products = _productService.GetAllProducts().ToList();
+            DataWrapPanel.Children.Clear();
 
             foreach (var product in products)
             {
