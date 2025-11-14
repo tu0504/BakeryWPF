@@ -23,5 +23,16 @@ public partial class Product
 
     public virtual Category Category { get; set; } = null!;
 
+    public string FullImageUrl
+    {
+        get
+        {
+            if (string.IsNullOrEmpty(ImageUrl))
+                return null;
+
+            return $"pack://application:,,,/{ImageUrl}";
+        }
+    }
+
     public virtual ICollection<OrderDetail> OrderDetails { get; set; } = new List<OrderDetail>();
 }
