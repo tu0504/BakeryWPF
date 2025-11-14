@@ -23,7 +23,7 @@ namespace Bakery.WpfApplication
     /// </summary>
     public partial class AdminDashboardWindow : Window
     {
-    private readonly IUserService _userService;
+        private readonly IUserService _userService;
 
         public AdminDashboardWindow()
         {
@@ -52,7 +52,7 @@ namespace Bakery.WpfApplication
         }
         private void btnBakery_Click(object sender, RoutedEventArgs e)
         {
-            ContentArea.Content = new View.BakeryManagement();
+
         }
 
         private void btnOrder_Click(object sender, RoutedEventArgs e)

@@ -31,7 +31,7 @@ namespace Bakery.Repository.Repositories.Implement
 
         public List<User> GetAll()
         {
-            var u = _context.Users.Where(x => x.Status == true).ToList();
+            var u = _context.Users.ToList();
             return u;
         }
 
@@ -41,9 +41,9 @@ namespace Bakery.Repository.Repositories.Implement
             return u;
         }
 
-        public User GetUserByUserName(string userName)
+        public User GetUserByEmail(string email)
         {
-            var u = _context.Users.FirstOrDefault(x => x.UserName.Equals(userName));
+            var u = _context.Users.FirstOrDefault(x => x.Email.Equals(email));
             return u;
         }
 
@@ -56,29 +56,43 @@ namespace Bakery.Repository.Repositories.Implement
 
         public void UpdateCustomer(User user)
         {
-            var u = _context.Users.FirstOrDefault(x => x.UserId == user.UserId);
+            var tracked = _context.Users.FirstOrDefault(x => x.UserId == user.UserId);
+            if (tracked == null) throw new ArgumentException("User not found.");
 
-            if (u != null)
-            {
-                _context.Update(user);
-                _context.SaveChanges();
-            }
+            _context.Entry(tracked).CurrentValues.SetValues(user);
+            _context.SaveChanges();
         }
 
-        public List<User> SearchByName(string fullName)
+        public List<User> SearchByNameOrEmail(string searchTerm)
         {
+            if (string.IsNullOrWhiteSpace(searchTerm))
+            {
+                return new List<User>();
+            }
+
+            string search = searchTerm.Trim().ToLower();
+
+
             var u = _context.Users
-                .Where(x => x.FullName.Contains(fullName) && x.Status == true)
+                .Where(x => x.FullName.ToLower().Contains(search) || x.Email.ToLower().Contains(search)
+                )
+                .Where(x => x.Status == true)
                 .ToList();
+
             return u;
         }
 
-       
 
-        public User? GetUserByEmailAndPassword(string email, string password)
+
+        User IUserRepository.GetUserByEmailAndPassword(string email, string password)
         {
+            string lowerEmail = email.ToLower();
+
             return _context.Users.FirstOrDefault(u =>
-                u.Email == email &&
+                // 2. ✅ SỬA LỖI: Chuyển đổi cột DB sang chữ thường trước khi so sánh
+                u.Email.ToLower() == lowerEmail &&
+
+                // 3. Giữ nguyên kiểm tra mật khẩu (vì bạn không dùng hash)
                 u.Password == password);
         }
     }

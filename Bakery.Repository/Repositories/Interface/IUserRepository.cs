@@ -11,13 +11,13 @@ namespace Bakery.Repository.Repositories.Interface
     {
         List<User> GetAll();
         User GetUserById(int id);
-        User GetUserByUserName(string userName);
+        User GetUserByEmail(string email);
         void SaveUser(User user);
         void DeleteCustomer(User user);
         void UpdateCustomer(User user);
 
-        List<User> SearchByName(string fullName);
-       
+        List<User> SearchByNameOrEmail(string fullName);
+
         User GetUserByEmailAndPassword(string email, string password);
     }
 }

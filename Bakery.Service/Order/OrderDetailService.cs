@@ -87,11 +87,20 @@ namespace Bakery.Service
         {
             try
             {
-                return _orderDetailRepository.Remove(entity);
+                using (var ctx = new Bakery.Repository.Context.BakeryContext())
+                {
+                    var repo = new Bakery.Repository.Repositories.OrderDetailRepo(ctx);
+                    var existing = repo.GetById(entity.OrderDetailId);
+                    if (existing == null)
+                    {
+                        return false;
+                    }
+
+                    return repo.Remove(existing);
+                }
             }
             catch (Exception ex)
             {
-                // Log exception or handle as needed
                 throw new Exception($"Error removing order detail with ID {entity.OrderDetailId}", ex);
             }
         }

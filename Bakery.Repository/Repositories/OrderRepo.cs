@@ -1,4 +1,5 @@
 ﻿using Bakery.Repository.Models;
+using Bakery.Repository.Context;
 using Microsoft.EntityFrameworkCore;
 using Repositories.Base;
 using System;
@@ -20,6 +21,8 @@ namespace Bakery.Repository.Repositories
 
     public class OrderRepo : GenericRepository<Order>, IOrderRepo
     {
+        public OrderRepo() : base() { }
+        public OrderRepo(BakeryContext context) : base(context) { }
         // Use 'new' because base GenericRepository already defines GetAll/ Create/Update/Remove/GetById
     public new List<Order> GetAll()
         {
