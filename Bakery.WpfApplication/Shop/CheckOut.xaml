@@ -30,9 +30,9 @@
                         </DataTemplate>
                     </DataGridTemplateColumn.CellTemplate>
                 </DataGridTemplateColumn>
-                <DataGridTextColumn Header="Category" Binding="{Binding Product.Category.CategoryName}" Width="*"/>
+                <DataGridTextColumn Header="Category" Binding="{Binding Product.Category.CategoryName}" Width="100"/>
                 <DataGridTextColumn Header="Quantity" Binding="{Binding Quantity}" Width="100"/>
-                <DataGridTextColumn Header="Price" Binding="{Binding UnitPrice}" Width="*"/>
+                <DataGridTextColumn x:Name="colPrice" Header="Price" Binding="{Binding UnitPrice, StringFormat='{}{0:C}', ConverterCulture='vi-VN'}" Width="*"/>
             </DataGrid.Columns>
         </DataGrid>
 

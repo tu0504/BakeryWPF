@@ -86,13 +86,6 @@ namespace Bakery.WpfApplication
             register.ShowDialog();
         }
 
-        private void btnRegister_Click(object sender, RoutedEventArgs e)
-        {
-            RegisterWindow register = new RegisterWindow();
-            register.ShowDialog();
-            Hide();
-        }
-
 
         private void txtEmail_GotFocus(object sender, RoutedEventArgs e)
         {

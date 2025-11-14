@@ -54,12 +54,6 @@ namespace Bakery.WpfApplication.Shop
 
         private void LoadProducts()
         {
-            if (_productService == null || _categoryService == null)
-            {
-                MessageBox.Show("Services not initialized!");
-                return;
-            }
-
             var products = _productService.GetAllProducts().ToList();
             DataWrapPanel.Children.Clear();
             if (_productService == null || _categoryService == null)
@@ -67,9 +61,6 @@ namespace Bakery.WpfApplication.Shop
                 MessageBox.Show("Services not initialized!");
                 return;
             }
-
-            var products = _productService.GetAllProducts().ToList();
-            DataWrapPanel.Children.Clear();
 
             foreach (var product in products)
             {
@@ -104,9 +95,9 @@ namespace Bakery.WpfApplication.Shop
 
                 }
 
-                var productPrice = (int)product.Price;
+                var productPrice = product.Price.ToString("C", new System.Globalization.CultureInfo("vi-VN"));
                 panel.Children.Add(new TextBlock { Text = product.ProductName, FontWeight = FontWeights.Bold, Margin = new Thickness(5) });
-                panel.Children.Add(new TextBlock { Text = $"Price: {productPrice}đ", Margin = new Thickness(5) });
+                panel.Children.Add(new TextBlock { Text = $"Price: {productPrice}", Margin = new Thickness(5) });
 
                 Button btn = new Button { Content = "Add to cart", Width = 100, Margin = new Thickness(0, 5, 0, 0),
                     Background = Brushes.Orange,

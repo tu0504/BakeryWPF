@@ -1,4 +1,5 @@
 ﻿using Bakery.Repository.Models;
+using Bakery.Service;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -38,7 +39,7 @@ namespace Bakery.WpfApplication.Shop
             dgData.ItemsSource = _currentOrderDetails;
 
             decimal totalPrice = _currentOrderDetails.Sum(od => od.Quantity * od.UnitPrice);
-            txtTotalPrice.Text = totalPrice.ToString("đ");
+            txtTotalPrice.Text = totalPrice.ToString("C", new System.Globalization.CultureInfo("vi-VN"));
         }
 
         private void dgData_SelectionChanged(object sender, SelectionChangedEventArgs e)
